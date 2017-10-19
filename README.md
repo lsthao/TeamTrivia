@@ -4,8 +4,11 @@
 
 
 ## Project Objectives
+* GET by Category
+* GET by Type
+* GET by Difficulty
 
-
+* Team name generator (stretch objective)
 
 ## Project Plan
 
