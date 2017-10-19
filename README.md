@@ -35,14 +35,14 @@ Week 12
 * Questions
   * QuestionID
   * Question
-  * Answer
   * CategoryID
   * DifficultyID
   * TypeID
 * WrongAnswers
   * WrongAnswersID
   * QuestionID
-  * WrongAnswer
+  * Answers
+  * Correct
 * Categories
   * CategoryID
   * CategoryName
