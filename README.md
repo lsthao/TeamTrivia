@@ -12,24 +12,24 @@
 
 ## Project Plan
 Week 9
-[ ] Create database
-[ ] Populate database (come up with q's, categories, etc)
-[ ] Start to create Entities/Daos
+- [ ] Create database
+- [ ] Populate database (come up with q's, categories, etc)
+- [ ] Start to create Entities/Daos
 
 Week 10
-[ ] Complete entities/daos
-[ ] Determine POST functionality/feasability
-[ ] Create API Functions/Endpoints ??
-[ ] Create simple web app that will consume our API
+- [ ] Complete entities/daos
+- [ ] Determine POST functionality/feasability
+- [ ] Create API Functions/Endpoints ??
+- [ ] Create simple web app that will consume our API
 
 Week 11
-[ ] Complete API functions
-[ ] POST functions
+- [ ] Complete API functions
+- [ ] POST functions
 
 Week 12
-[ ] Create team name generator
-[ ] Finish up stuff
-[ ] Make presentation
+- [ ] Create team name generator
+- [ ] Finish up stuff
+- [ ] Make presentation
 
 ## Database (Tables/Columns)
 * Questions
