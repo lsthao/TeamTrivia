@@ -14,6 +14,7 @@
 Week 9
 - [ ] Create database
 - [ ] Populate database (come up with q's, categories, etc)
+- [ ] Project structure
 - [ ] Start to create Entities/Daos
 
 Week 10
