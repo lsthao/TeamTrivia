@@ -1,6 +1,6 @@
-package edu.matc.persistence;
+package edu.matc.teamtriviaapi.persistence;
 
-import entity.Question;
+import edu.matc.teamtriviaapi.entity.Question;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
