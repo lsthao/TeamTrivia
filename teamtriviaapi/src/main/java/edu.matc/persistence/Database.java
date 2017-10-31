@@ -1,4 +1,4 @@
-package persistence;
+package edu.matc.persistence;
 
 import java.io.IOException;
 import java.sql.Connection;

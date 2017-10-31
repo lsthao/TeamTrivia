@@ -1,4 +1,4 @@
-package entity;
+package edu.matc.entity;
 
 public class Difficulty {
 }
