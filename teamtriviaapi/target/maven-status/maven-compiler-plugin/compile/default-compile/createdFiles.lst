@@ -1,0 +1,8 @@
+edu/matc/teamtriviaapi/entity/Category.class
+edu/matc/teamtriviaapi/entity/Type.class
+edu/matc/teamtriviaapi/persistence/SessionFactoryProvider.class
+edu/matc/teamtriviaapi/persistence/Database.class
+edu/matc/teamtriviaapi/persistence/QuestionDAO.class
+edu/matc/teamtriviaapi/entity/Question.class
+edu/matc/teamtriviaapi/entity/Difficulty.class
+edu/matc/teamtriviaapi/persistence/CategoryDAO.class

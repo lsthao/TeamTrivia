@@ -1,10 +1,15 @@
 package edu.matc.teamtriviaapi.persistence;
 
 import edu.matc.teamtriviaapi.entity.Question;
+import edu.matc.teamtriviaapi.entity.Category;
+import edu.matc.teamtriviaapi.entity.Type;
+import edu.matc.teamtriviaapi.entity.Difficulty;
 import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +42,60 @@ public class QuestionDAO {
             question = (Question) session.get(Question.class, questionId);
         } catch (HibernateException he) {
             log.error("Error getting Question with id: " + questionId, he);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return question;
+    }
+
+    public List<Question> getByCategoryID(Category category) {
+        List<Question> question = new ArrayList<Question>();
+        Session session = null;
+        try {
+            session = SessionFactoryProvider.getSessionFactory().openSession();
+            Criteria criteria = session.createCriteria(Question.class);
+            criteria.add(Restrictions.eq("category", category));
+            question = criteria.list();
+        } catch (HibernateException he) {
+            log.error("Error getting team name: " + category, he);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return question;
+    }
+
+    public List<Question> getByTypeID(Type type) {
+        List<Question> question = new ArrayList<Question>();
+        Session session = null;
+        try {
+            session = SessionFactoryProvider.getSessionFactory().openSession();
+            Criteria criteria = session.createCriteria(Question.class);
+            criteria.add(Restrictions.eq("type", type));
+            question = criteria.list();
+        } catch (HibernateException he) {
+            log.error("Error getting team name: " + type, he);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return question;
+    }
+
+    public List<Question> getByDifficultyID(Difficulty difficulty) {
+        List<Question> question = new ArrayList<Question>();
+        Session session = null;
+        try {
+            session = SessionFactoryProvider.getSessionFactory().openSession();
+            Criteria criteria = session.createCriteria(Question.class);
+            criteria.add(Restrictions.eq("difficulty", difficulty));
+            question = criteria.list();
+        } catch (HibernateException he) {
+            log.error("Error getting team name: " + difficulty, he);
         } finally {
             if (session != null) {
                 session.close();
