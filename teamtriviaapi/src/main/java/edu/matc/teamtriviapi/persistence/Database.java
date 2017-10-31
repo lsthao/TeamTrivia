@@ -1,4 +1,4 @@
-package edu.matc.persistence;
+package edu.matc.teamtriviapi.persistence;
 
 import java.io.IOException;
 import java.sql.Connection;

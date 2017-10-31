@@ -1,4 +1,4 @@
-package edu.matc.entity;
+package edu.matc.teamtriviapi.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
