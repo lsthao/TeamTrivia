@@ -17,5 +17,4 @@ public class Question {
     @Column
     private String Question;
 
-
 }
