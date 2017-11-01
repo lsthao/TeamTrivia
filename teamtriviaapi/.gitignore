@@ -48,7 +48,7 @@ atlassian-ide-plugin.xml
 
 # TO MAKE ROOT PASSWORDS SAFE. gitignore db connectors
 database.properties
-hibernate.cfg.xml
+
 
 
 

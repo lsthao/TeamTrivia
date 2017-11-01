@@ -22,6 +22,10 @@
 
         <!-- List the annotated entity class/es -->
         <!-- <mapping class=""/> -->
-    </session-factory>
+        <mapping class="edu.matc.teamtriviaapi.entity.Question"/>
+        <mapping class="edu.matc.teamtriviaapi.entity.Category"/>
+        <mapping class="edu.matc.teamtriviaapi.entity.Difficulty"/>
+        <mapping class="edu.matc.teamtriviaapi.entity.Type"/>
+        </session-factory>
 
 </hibernate-configuration>
