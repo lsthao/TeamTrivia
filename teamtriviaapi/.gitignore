@@ -50,6 +50,8 @@ atlassian-ide-plugin.xml
 database.properties
 hibernate.cfg.xml
 
+#still getting .idea in github commits
+.idea/*
 
 
 
