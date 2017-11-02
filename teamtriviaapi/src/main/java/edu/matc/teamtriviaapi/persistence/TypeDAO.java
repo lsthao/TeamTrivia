@@ -1,6 +1,11 @@
 package edu.matc.teamtriviaapi.persistence;
 
 import edu.matc.teamtriviaapi.entity.Type;
+import org.apache.log4j.Logger;
+import org.hibernate.Hibernate;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +33,7 @@ public class TypeDAO {
         return categories;
     }
 
-    public Type getTypeById(int Id) {
+    public Type getTypeById(int id) {
         Type type = null;
         Session session = null;
 

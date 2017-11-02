@@ -1,6 +1,6 @@
 package edu.matc.teamtriviaapi.persistence;
 
-import edu.matc.teamtriviaapi.entity.Difficulty;
+import edu.matc.teamtriviaapi.entity.Type;
 import org.apache.log4j.Logger;
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
@@ -10,17 +10,17 @@ import org.hibernate.Transaction;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DifficultyDAO {
+public class TypeDAOTest {
 
     private final Logger log = Logger.getLogger(this.getClass());
 
-    public List<Difficulty> getAllDifficulties() {
-        List<Difficulty> difficulties = new ArrayList<Difficulty>();
+    public List<Type> getAllTypes() {
+        List<Type> categories = new ArrayList<Type>();
         Session session = null;
 
         try {
             session = SessionFactoryProvider.getSessionFactory().openSession();
-            difficulties = session.createCriteria(Difficulty.class).list();
+            categories = session.createCriteria(Type.class).list();
         } catch (HibernateException he) {
             log.error("Hibernate exception is caught ", he);
         } catch (Exception e) {
@@ -30,41 +30,41 @@ public class DifficultyDAO {
                 session.close();
             }
         }
-        return difficulties;
+        return categories;
     }
 
-    public Difficulty getDifficultyById(int id) {
-        Difficulty difficulty = null;
+    public Type getTypeById(int id) {
+        Type type = null;
         Session session = null;
 
         try {
             session = SessionFactoryProvider.getSessionFactory().openSession();
-            difficulty = (Difficulty) session.get(Difficulty.class, id);
-            Hibernate.initialize(difficulty.getQuestion());
+            type = (Type) session.get(Type.class, id);
+            Hibernate.initialize(type.getQuestion());
         } catch (HibernateException he) {
-            log.error("Error getting difficulty by id", he);
+            log.error("Error getting type by id", he);
         } catch (Exception e) {
-            log.error("General exception for getDifficultyById() is caught", e);
+            log.error("General exception for getTypeById() is caught", e);
         } finally {
             if (session != null) {
                 session.close();
             }
         }
-        return difficulty;
+        return type;
     }
 
-    public int addDifficulty(Difficulty difficulty) {
+    public int addType(Type type) {
         int id = 0;
         Session session = null;
         try {
             session = SessionFactoryProvider.getSessionFactory().openSession();
             Transaction transaction = session.beginTransaction();
-            id = (int) session.save(difficulty);
+            id = (int) session.save(type);
             transaction.commit();
         } catch (HibernateException he) {
-            log.error("Error adding difficulty", he);
+            log.error("Error adding type", he);
         } catch (Exception e) {
-            log.error("General exception for addDifficulty() is caught", e);
+            log.error("General exception for addType() is caught", e);
         } finally {
             if (session != null) {
                 session.close();
@@ -73,18 +73,18 @@ public class DifficultyDAO {
         return id;
     }
 
-    public void deleteDifficulty(int id) {
+    public void deleteType(int id) {
         Session session = null;
         try {
             session = SessionFactoryProvider.getSessionFactory().openSession();
             Transaction transaction = session.beginTransaction();
-            Difficulty difficulty = (Difficulty) session.load(Difficulty.class, id);
-            session.delete(difficulty);
+            Type type = (Type) session.load(Type.class, id);
+            session.delete(type);
             transaction.commit();
         } catch (HibernateException he) {
-            log.error("Error deleting difficulty", he);
+            log.error("Error deleting type", he);
         } catch (Exception e) {
-            log.error("General exception for deleteDifficulty() is caught", e);
+            log.error("General exception for deleteType() is caught", e);
         } finally {
             if (session != null) {
                 session.close();
@@ -92,17 +92,17 @@ public class DifficultyDAO {
         }
     }
 
-    public void updateDifficulty(Difficulty difficulty) {
+    public void updateType(Type type) {
         Session session = null;
         try {
             session = SessionFactoryProvider.getSessionFactory().openSession();
             Transaction transaction = session.beginTransaction();
-            session.update(difficulty);
+            session.update(type);
             transaction.commit();
         } catch (HibernateException he) {
-            log.error("Error updating difficulty", he);
+            log.error("Error updating type", he);
         } catch (Exception e) {
-            log.error("General exception for updateDifficulty() is caught", e);
+            log.error("General exception for updateType() is caught", e);
         } finally {
             if (session != null) {
                 session.close();
