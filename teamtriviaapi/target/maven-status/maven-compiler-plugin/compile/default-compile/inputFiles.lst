@@ -1,8 +1,0 @@
-/Users/kvang/IdeaProjects/TeamTrivia/teamtriviaapi/src/main/java/edu/matc/teamtriviaapi/persistence/Database.java
-/Users/kvang/IdeaProjects/TeamTrivia/teamtriviaapi/src/main/java/edu/matc/teamtriviaapi/entity/Difficulty.java
-/Users/kvang/IdeaProjects/TeamTrivia/teamtriviaapi/src/main/java/edu/matc/teamtriviaapi/persistence/QuestionDAO.java
-/Users/kvang/IdeaProjects/TeamTrivia/teamtriviaapi/src/main/java/edu/matc/teamtriviaapi/entity/Type.java
-/Users/kvang/IdeaProjects/TeamTrivia/teamtriviaapi/src/main/java/edu/matc/teamtriviaapi/persistence/CategoryDAO.java
-/Users/kvang/IdeaProjects/TeamTrivia/teamtriviaapi/src/main/java/edu/matc/teamtriviaapi/entity/Question.java
-/Users/kvang/IdeaProjects/TeamTrivia/teamtriviaapi/src/main/java/edu/matc/teamtriviaapi/persistence/SessionFactoryProvider.java
-/Users/kvang/IdeaProjects/TeamTrivia/teamtriviaapi/src/main/java/edu/matc/teamtriviaapi/entity/Category.java
