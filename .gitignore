@@ -16,7 +16,6 @@
 .idea/**/sqlDataSources.xml
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
-.idea/*
 
 # Gradle:
 .idea/**/gradle.xml
@@ -51,4 +50,12 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 *.iml
+
+# User added
+.idea/*
+.idea
+teamtriviaapi/.idea
+target
+target/*
+teamtriviaapi/target
 

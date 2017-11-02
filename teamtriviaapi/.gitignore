@@ -65,3 +65,10 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+# User added
+.idea/*
+.idea
+teamtriviaapi/.idea
+target
+target/*
+teamtriviaapi/target
