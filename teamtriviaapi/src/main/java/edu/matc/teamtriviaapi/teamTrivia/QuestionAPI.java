@@ -37,7 +37,7 @@ public class QuestionAPI {
         String output = "";
 
         if (question != null) {
-            output = question.toString(); // question to string
+            output = question.toStringAllProperties(); // question to string
             return Response.status(200).entity(output).build();
 
         } else {
@@ -48,7 +48,7 @@ public class QuestionAPI {
 
     @GET
     @Produces({"text/html", "text/plain"})
-    @Path("HTML")
+    @Path("/all")
     public Response getManyQuestions(@QueryParam("type") String type, @QueryParam("category") String category,
                                      @QueryParam("amount") String amount, @QueryParam("difficulty") String difficulty) {
 
@@ -69,6 +69,62 @@ public class QuestionAPI {
         }
     }
 
+    @GET
+    @Produces({"application/json", "text/plain"})
+    @Path("/JSON/{id}")
+    public Response getQuestionJSON(@PathParam("id") String id) {
+
+        if (!isNumeric(id)) {
+
+            int status = 404;
+            String error = formatter.formatJSONMessage(status, "Ids should be numeric");
+            return Response.status(status).entity(error).build();
+        }
+
+        Question question = dao.getQuestionById(Integer.parseInt(id));
+        String output = "";
+
+        if (question != null) {
+            output = question.toStringJSONAllProperties(); // question to json string
+            return Response.status(200).entity(output).build();
+
+        } else {
+            String error = formatter.formatJSONMessage(404, "That question does not exist");
+            return Response.status(404).entity(error).build();
+        }
+
+    }
+
+    @GET
+    @Produces({"application/json", "text/plain"})
+    @Path("/JSON/all")
+    public Response getAllQuestionsJSON() {
+
+        List<Question> questions = dao.getAllQuestions();
+        String output = "";
+
+        if (questions.size() > 0) {
+
+            output += "[";
+            for (Question question: questions) {
+
+                output += question.toStringJSON(); // questions to string
+                output += ",";
+            }
+            output = output.substring(0, output.length() - 1);
+            output += "]";
+
+
+            return Response.status(200).entity(output).build();
+
+        } else {
+            int status = 404;
+            output = "There are no questions here";
+            output = formatter.formatJSONMessage(status, output);
+            return Response.status(status).entity(output).build();
+        }
+
+    }
 
     @POST
     @Path("/post")

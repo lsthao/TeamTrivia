@@ -5,10 +5,7 @@ import edu.matc.teamtriviaapi.entity.Category;
 import edu.matc.teamtriviaapi.entity.Type;
 import edu.matc.teamtriviaapi.entity.Difficulty;
 import org.apache.log4j.Logger;
-import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.ArrayList;
@@ -40,6 +37,9 @@ public class QuestionDAO {
         try {
             session = SessionFactoryProvider.getSessionFactory().openSession();
             question = (Question) session.get(Question.class, questionId);
+            Hibernate.initialize(question.getCategory());
+            Hibernate.initialize(question.getDifficulty());
+            Hibernate.initialize(question.getType());
         } catch (HibernateException he) {
             log.error("Error getting Question with id: " + questionId, he);
         } finally {
