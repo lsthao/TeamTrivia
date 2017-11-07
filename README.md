@@ -48,11 +48,7 @@ Week 12
   * CategoryID
   * DifficultyID
   * TypeID
-* Answers
-  * AnswerID
-  * QuestionID
   * Answer
-  * Correct
 * Categories
   * CategoryID
   * CategoryName
@@ -62,3 +58,74 @@ Week 12
 * Type
   * TypeID
   * TypeName
+
+## API EndPoints & Usage
+Base Url: http://localhost:8080/teamtriviaapi/teamTrivia
+
+### Questions teamTrivia/questions/
+#### teamTrivia/questions/all
+  * Returns all items in HTML
+  * Returns id, question, answer
+  * Option parameters include amount, difficulty, type, category
+  * Ex. teamTrivia/questions/all?difficulty=Medium&type=T/F&category=Java Hibernate&amount=10
+
+#### teamTrivia/questions/< id >
+  * Returns specific item in HTML
+  * Returns all item fields, including id, question, answer, difficulty, type, and category
+
+#### teamTrivia/questions/JSON/all
+  * Returns all items in JSON
+  * Returns id, question, answer
+  * Option parameters include amount, difficulty, type, category
+  * Ex. teamTrivia/questions/JSON/all?difficulty=Medium&type=T/F&category=Java Hibernate&amount=10
+
+#### teamTrivia/questions/JSON/< id >
+  * Returns specific item in JSON
+  * Returns all item fields, including id, question, answer, difficulty, type, and category
+
+#### Notes
+  * Filtering on multiple values is not supported. For example, teamTrivia/questions/all?difficulty=Medium,Hard (selecting questions with difficulty of Medium or Hard) will return no results.
+
+### Categories teamTrivia/category/
+
+#### teamTrivia/category/all
+  * Returns all items in HTML
+
+#### teamTrivia/category/< id >
+  * Returns specific item in HTML
+
+#### teamTrivia/category/JSON/all
+  * Returns all items in JSON
+
+#### teamTrivia/category/JSON/< id >
+  * Returns specific item in JSON
+
+
+### Types teamTrivia/type/
+
+#### teamTrivia/type/all
+  * Returns all items in HTML
+
+#### teamTrivia/type/< id >
+  * Returns specific item in HTML
+
+#### teamTrivia/type/JSON/all
+  * Returns all items in JSON
+
+#### teamTrivia/type/JSON/< id >
+  * Returns specific item in JSON
+
+### Difficulties teamTrivia/difficulty/
+
+#### teamTrivia/difficulty/all
+  * Returns all items in HTML
+
+#### teamTrivia/difficulty/< id >
+  * Returns specific item in HTML
+
+#### teamTrivia/difficulty/JSON/all
+  * Returns all items in JSON
+
+#### teamTrivia/difficulty/JSON/< id >
+  * Returns specific item in JSON
+
