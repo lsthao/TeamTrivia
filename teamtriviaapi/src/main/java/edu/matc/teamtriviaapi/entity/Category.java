@@ -60,4 +60,10 @@ public class Category {
                 ", CategoryName='" + CategoryName + '\'' +
                 '}';
     }
+
+    public String toStringJSON() {
+        return "{\"CategoryID\":\"" + CategoryID + "\"" +
+                ", \"CategoryName\":\"" + CategoryName + '\"' +
+                '}';
+    }
 }

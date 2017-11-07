@@ -40,7 +40,6 @@ public class CategoryDAO {
         try {
             session = SessionFactoryProvider.getSessionFactory().openSession();
             category = (Category) session.get(Category.class, id);
-            Hibernate.initialize(category.getQuestion());
         } catch (HibernateException he) {
             log.error("Error getting category by id", he);
         } catch (Exception e) {

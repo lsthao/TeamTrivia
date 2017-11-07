@@ -40,7 +40,6 @@ public class TypeDAO {
         try {
             session = SessionFactoryProvider.getSessionFactory().openSession();
             type = (Type) session.get(Type.class, id);
-            Hibernate.initialize(type.getQuestion());
         } catch (HibernateException he) {
             log.error("Error getting type by id", he);
         } catch (Exception e) {
