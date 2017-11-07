@@ -3,6 +3,7 @@ package edu.matc.teamtriviaapi.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Difficulty {
@@ -12,14 +13,18 @@ public class Difficulty {
     @GenericGenerator(name = "increment", strategy = "increment")
     private int DifficultyID;
 
-    @Column(name = "TypeName")
+    @Column(name = "DifficultyName")
     private String DifficultyName;
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "Difficulty_DifficultyID")
-    private Question question;
+    private Set<Question> question;
 
     public Difficulty() {
+    }
+
+    public Difficulty(String difficultyName) {
+        DifficultyName = difficultyName;
     }
 
     public int getDifficultyID() {
@@ -38,11 +43,11 @@ public class Difficulty {
         DifficultyName = difficultyName;
     }
 
-    public Question getQuestion() {
+    public Set<Question> getQuestion() {
         return question;
     }
 
-    public void setQuestion(Question question) {
+    public void setQuestion(Set<Question> question) {
         this.question = question;
     }
 
@@ -51,7 +56,6 @@ public class Difficulty {
         return "Difficulty{" +
                 "DifficultyID=" + DifficultyID +
                 ", DifficultyName='" + DifficultyName + '\'' +
-                ", question=" + question +
                 '}';
     }
 
