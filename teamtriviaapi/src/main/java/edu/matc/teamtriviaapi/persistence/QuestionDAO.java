@@ -6,6 +6,7 @@ import edu.matc.teamtriviaapi.entity.Type;
 import edu.matc.teamtriviaapi.entity.Difficulty;
 import org.apache.log4j.Logger;
 import org.hibernate.*;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.ArrayList;
@@ -29,6 +30,41 @@ public class QuestionDAO {
             }
         }
         return questions;
+    }
+
+
+    public List<Question> findByProperty(String type, String category, String difficulty, String amount){
+        Session session = null;
+        List<Question> items = new ArrayList<Question>();
+
+        try {
+            session = SessionFactoryProvider.getSessionFactory().openSession();
+            Criteria criteria = session.createCriteria(Question.class);
+            if (type != null){
+                criteria.add(Restrictions.eq("type", getType(type)));
+            }
+            if (category != null) {
+                criteria.add(Restrictions.eq("category", getCategory(category)));
+            }
+            if (difficulty != null) {
+                criteria.add(Restrictions.eq("difficulty", getDifficulty(difficulty)));
+            }
+            if (amount != null) {
+                criteria.setMaxResults(Integer.parseInt(amount));
+            }
+            items =  criteria.list();
+
+        } catch (HibernateException he) {
+            log.error("Error getting questions", he);
+        } catch (NullPointerException e) {
+            log.error("Error getting questions they don't exist: ", e);
+
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return items;
     }
 
     public Question getQuestionById(int questionId) {
@@ -178,5 +214,33 @@ public class QuestionDAO {
         }
     }
 
+    public Type getType(String type) {
+        TypeDAO typeDao = new TypeDAO();
+        Type typeObj = new Type();
+        List<Type> types = typeDao.findByProperty("TypeName", type, MatchMode.ANYWHERE);
+        if (types.size() > 0) {
+            typeObj = types.get(0);
+        }
+        return typeObj;
+    }
 
+    public Category getCategory(String category) {
+        CategoryDAO categoryDAO = new CategoryDAO();
+        Category categoryObj = new Category();
+        List<Category> categories = categoryDAO.findByProperty("CategoryName", category, MatchMode.ANYWHERE);
+        if (categories.size() > 0) {
+            categoryObj = categories.get(0);
+        }
+        return categoryObj;
+    }
+
+    public Difficulty getDifficulty(String difficulty) {
+        DifficultyDAO difficultyDAO = new DifficultyDAO();
+        Difficulty difficultyObj = new Difficulty();
+        List<Difficulty> difficulties = difficultyDAO.findByProperty("DifficultyName", difficulty, MatchMode.ANYWHERE);
+        if (difficulties.size() > 0) {
+            difficultyObj = difficulties.get(0);
+        }
+        return difficultyObj;
+    }
 }

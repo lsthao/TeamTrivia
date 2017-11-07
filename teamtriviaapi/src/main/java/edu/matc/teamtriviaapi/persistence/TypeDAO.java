@@ -6,6 +6,8 @@ import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,5 +109,28 @@ public class TypeDAO {
                 session.close();
             }
         }
+    }
+
+    public List<Type> findByProperty(String propertyName, String value, MatchMode matchMode){
+        Session session = null;
+        List<Type> items = new ArrayList<Type>();
+        try {
+            session = SessionFactoryProvider.getSessionFactory().openSession();
+            if (matchMode != null){
+                items =  session.createCriteria(Type.class).add(Restrictions.ilike(propertyName, value, matchMode)).list();
+            }else{
+                items =  session.createCriteria(Type.class).add(Restrictions.ilike(propertyName, value, MatchMode.EXACT)).list();
+            }
+        } catch (HibernateException he) {
+            log.error("Error getting types", he);
+        } catch (NullPointerException e) {
+            log.error("Error getting types, they don't exist: ", e);
+
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return items;
     }
 }

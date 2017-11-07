@@ -2,8 +2,15 @@ package edu.matc.teamtriviaapi.teamTrivia;
 /**
  * Created by sarah on 10/31/2017.
  */
+import edu.matc.teamtriviaapi.entity.Category;
+import edu.matc.teamtriviaapi.entity.Difficulty;
 import edu.matc.teamtriviaapi.entity.Question;
+import edu.matc.teamtriviaapi.entity.Type;
+import edu.matc.teamtriviaapi.persistence.CategoryDAO;
+import edu.matc.teamtriviaapi.persistence.DifficultyDAO;
 import edu.matc.teamtriviaapi.persistence.QuestionDAO;
+import edu.matc.teamtriviaapi.persistence.TypeDAO;
+import org.hibernate.criterion.MatchMode;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -52,7 +59,16 @@ public class QuestionAPI {
     public Response getManyQuestions(@QueryParam("type") String type, @QueryParam("category") String category,
                                      @QueryParam("amount") String amount, @QueryParam("difficulty") String difficulty) {
 
-        List<Question> questions = dao.getAllQuestions();
+        List<Question> questions = new ArrayList<Question>();
+
+        if (type == null && category == null && amount == null && difficulty == null) {
+
+            questions = dao.getAllQuestions();
+        } else {
+
+            questions = dao.findByProperty(type, category, difficulty, amount);
+        }
+
         String output = "";
 
         if (questions.size() > 0) {
@@ -98,9 +114,19 @@ public class QuestionAPI {
     @GET
     @Produces({"application/json", "text/plain"})
     @Path("/JSON/all")
-    public Response getAllQuestionsJSON() {
+    public Response getAllQuestionsJSON(@QueryParam("type") String type, @QueryParam("category") String category,
+                                        @QueryParam("amount") String amount, @QueryParam("difficulty") String difficulty) {
 
-        List<Question> questions = dao.getAllQuestions();
+        List<Question> questions = new ArrayList<Question>();
+
+        if (type == null && category == null && amount == null && difficulty == null) {
+
+            questions = dao.getAllQuestions();
+        } else {
+
+            questions = dao.findByProperty(type, category, difficulty, amount);
+        }
+
         String output = "";
 
         if (questions.size() > 0) {
@@ -140,5 +166,6 @@ public class QuestionAPI {
     {
         return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
     }
+
 
 }

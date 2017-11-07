@@ -6,6 +6,8 @@ import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,5 +109,28 @@ public class DifficultyDAO {
                 session.close();
             }
         }
+    }
+
+    public List<Difficulty> findByProperty(String propertyName, String value, MatchMode matchMode){
+        Session session = null;
+        List<Difficulty> items = new ArrayList<Difficulty>();
+        try {
+            session = SessionFactoryProvider.getSessionFactory().openSession();
+            if (matchMode != null){
+                items =  session.createCriteria(Difficulty.class).add(Restrictions.ilike(propertyName, value, matchMode)).list();
+            }else{
+                items =  session.createCriteria(Difficulty.class).add(Restrictions.ilike(propertyName, value, MatchMode.EXACT)).list();
+            }
+        } catch (HibernateException he) {
+            log.error("Error getting difficulties", he);
+        } catch (NullPointerException e) {
+            log.error("Error getting difficulties they don't exist: ", e);
+
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return items;
     }
 }
