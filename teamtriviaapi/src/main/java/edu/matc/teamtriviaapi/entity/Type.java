@@ -59,4 +59,10 @@ public class Type {
                 ", TypeName='" + TypeName + '\'' +
                 '}';
     }
+
+    public String toStringJSON() {
+        return "{\"TypeID\":\"" + TypeID + "\"" +
+                ", \"TypeName\":\"" + TypeName + '\"' +
+                '}';
+    }
 }

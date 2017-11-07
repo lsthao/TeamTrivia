@@ -59,4 +59,10 @@ public class Difficulty {
                 '}';
     }
 
+    public String toStringJSON() {
+        return "{\"DifficultyID\":\"" + DifficultyID + "\"" +
+                ", \"DifficultyName\":\"" + DifficultyName + '\"' +
+                '}';
+    }
+
 }
