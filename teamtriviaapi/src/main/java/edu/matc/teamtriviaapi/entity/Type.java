@@ -3,6 +3,7 @@ package edu.matc.teamtriviaapi.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Type {
@@ -17,10 +18,14 @@ public class Type {
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "Type_TypeID")
-    private Question question;
+    private Set<Question> question;
 
     public Type() {
 
+    }
+
+    public Type(String typeName) {
+        TypeName = typeName;
     }
 
     public int getTypeID() {
@@ -39,11 +44,11 @@ public class Type {
         TypeName = typeName;
     }
 
-    public Question getQuestion() {
+    public Set<Question> getQuestion() {
         return question;
     }
 
-    public void setQuestion(Question question) {
+    public void setQuestion(Set<Question> question) {
         this.question = question;
     }
 
