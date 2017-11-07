@@ -49,7 +49,11 @@ public class QuestionDAO {
             if (difficulty != null) {
                 criteria.add(Restrictions.eq("difficulty", getDifficulty(difficulty)));
             }
-            if (amount != null) {
+            if (amount == null) {
+                criteria.setMaxResults(100);
+            } else if (Integer.parseInt(amount) > 100) {
+                criteria.setMaxResults(100);
+            } else if (amount != null) {
                 criteria.setMaxResults(Integer.parseInt(amount));
             }
             items =  criteria.list();
