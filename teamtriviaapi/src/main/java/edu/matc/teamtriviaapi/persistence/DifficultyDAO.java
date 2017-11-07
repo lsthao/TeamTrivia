@@ -40,7 +40,6 @@ public class DifficultyDAO {
         try {
             session = SessionFactoryProvider.getSessionFactory().openSession();
             difficulty = (Difficulty) session.get(Difficulty.class, id);
-            Hibernate.initialize(difficulty.getQuestion());
         } catch (HibernateException he) {
             log.error("Error getting difficulty by id", he);
         } catch (Exception e) {

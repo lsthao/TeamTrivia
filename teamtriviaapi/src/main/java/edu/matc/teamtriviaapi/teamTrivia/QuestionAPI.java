@@ -3,15 +3,16 @@ package edu.matc.teamtriviaapi.teamTrivia;
  * Created by sarah on 10/31/2017.
  */
 import edu.matc.teamtriviaapi.entity.Question;
+import edu.matc.teamtriviaapi.persistence.QuestionDAO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 
-
-@Path("/questions")
+@Path("questions")
 public class QuestionAPI {
+
     // The Java method will process HTTP GET requests
     @GET
     // The Java method will produce content identified by the MIME Media type "text/plain"
@@ -25,7 +26,7 @@ public class QuestionAPI {
     @GET
     @Produces({"text/html", "text/plain"})
     @Path("/{id}")
-    public Response getQuestion(@PathParam("id") String id) {
+    public Response getQuestionHTML(@PathParam("id") String id) {
         if (!isNumeric(id)) {
             return Response.status(400).entity("Ids should be numeric").build();
         }
@@ -45,14 +46,16 @@ public class QuestionAPI {
 
     @GET
     @Produces({"text/html", "text/plain"})
-    @Path("/query")
+    @Path("HTML")
     public Response getManyQuestions(@QueryParam("type") String type, @QueryParam("category") String category,
                                      @QueryParam("amount") String amount, @QueryParam("difficulty") String difficulty) {
 
         // TODO check inputs
 
         List<Question> questions = new ArrayList<Question>();
+
         // TODO get questions from database
+
         String output ="Questions here : amount-" + amount + "; difficulty- " +difficulty+ "; type- " +type +  "; category- " + category;
 
         if (questions != null) {
@@ -69,7 +72,7 @@ public class QuestionAPI {
     @POST
     @Path("/post")
     @Consumes("application/json")
-    public Response createProductInJSON(String test) {
+    public Response createQuestionInJSON(String test) {
 
         String result = "Product created : " + test;
         return Response.status(201).entity(result).build();

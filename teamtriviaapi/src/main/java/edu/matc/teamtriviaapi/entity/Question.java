@@ -20,18 +20,14 @@ public class Question {
     @Column (name = "Answer")
     private String answer;
 
-    @Column(name = "Category_CategoryID")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CategoryID", nullable = false)
     private Category category;
 
-    @Column(name = "Type_TypeID")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TypeID", nullable = false)
     private Type type;
 
-
-    @Column(name = "Difficulty_DifficultyID")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "DifficultyID", nullable = false)
     private Difficulty difficulty;

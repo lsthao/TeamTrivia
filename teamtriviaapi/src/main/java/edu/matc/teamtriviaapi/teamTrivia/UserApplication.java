@@ -4,7 +4,7 @@ package edu.matc.teamtriviaapi.teamTrivia;
  * Created by sarah on 10/22/2017.
  */
 
-import edu.matc.teamtriviaapi.entity.Question;
+import edu.matc.teamtriviaapi.entity.Difficulty;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
@@ -23,6 +23,9 @@ public class UserApplication extends Application {
         HashSet h = new HashSet<Class<?>>();
         h.add(HelloWorld.class);
         h.add(QuestionAPI.class);
+        h.add(DifficultyAPI.class);
+        h.add(TypeAPI.class);
+        h.add(CategoryAPI.class);
         return h;
     }
 }
