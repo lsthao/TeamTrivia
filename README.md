@@ -62,7 +62,7 @@ Week 12
 ## API EndPoints & Usage
 Base Url: http://localhost:8080/teamtriviaapi/teamTrivia
 
-### Questions teamTrivia/questions/
+### Questions
 #### teamTrivia/questions/all
   * Returns all items in HTML
   * Returns id, question, answer
@@ -86,7 +86,7 @@ Base Url: http://localhost:8080/teamtriviaapi/teamTrivia
 #### Notes
   * Filtering on multiple values is not supported. For example, teamTrivia/questions/all?difficulty=Medium,Hard (selecting questions with difficulty of Medium or Hard) will return no results.
 
-### Categories teamTrivia/category/
+### Categories
 
 #### teamTrivia/category/all
   * Returns all items in HTML
@@ -101,7 +101,7 @@ Base Url: http://localhost:8080/teamtriviaapi/teamTrivia
   * Returns specific item in JSON
 
 
-### Types teamTrivia/type/
+### Types
 
 #### teamTrivia/type/all
   * Returns all items in HTML
@@ -115,7 +115,7 @@ Base Url: http://localhost:8080/teamtriviaapi/teamTrivia
 #### teamTrivia/type/JSON/< id >
   * Returns specific item in JSON
 
-### Difficulties teamTrivia/difficulty/
+### Difficulties
 
 #### teamTrivia/difficulty/all
   * Returns all items in HTML
