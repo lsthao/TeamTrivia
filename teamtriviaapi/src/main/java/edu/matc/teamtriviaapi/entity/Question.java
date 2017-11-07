@@ -17,6 +17,9 @@ public class Question {
     @Column (name = "Question")
     private String question;
 
+    @Column (name = "Answer")
+    private String answer;
+
     @Column(name = "Category_CategoryID")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CategoryID", nullable = false)
@@ -33,11 +36,12 @@ public class Question {
     @JoinColumn(name = "DifficultyID", nullable = false)
     private Difficulty difficulty;
 
-
-
     public Question() {
-        this.questionId = questionId;
+    }
+
+    public Question(String question, String answer, Category category, Type type, Difficulty difficulty) {
         this.question = question;
+        this.answer = answer;
         this.category = category;
         this.type = type;
         this.difficulty = difficulty;
@@ -83,6 +87,11 @@ public class Question {
         this.difficulty = difficulty;
     }
 
+    public String getAnswer() {
+        return answer;
+    }
 
-
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
 }
