@@ -14,6 +14,7 @@ public class Question {
     @Column(name = "QuestionID")
     private int questionId;
 
+
     @Column (name = "Question")
     private String question;
 
@@ -21,15 +22,15 @@ public class Question {
     private String answer;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CategoryID", nullable = false)
+    @JoinColumn(name = "Category_CategoryID", nullable = false)
     private Category category;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "TypeID", nullable = false)
+    @JoinColumn(name = "Type_TypeID", nullable = false)
     private Type type;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "DifficultyID", nullable = false)
+    @JoinColumn(name = "Difficulty_DifficultyID", nullable = false)
     private Difficulty difficulty;
 
     public Question() {
@@ -89,5 +90,42 @@ public class Question {
 
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "questionId=" + questionId +
+                ", question='" + question + '\'' +
+                ", answer='" + answer + '\'' +
+                '}';
+    }
+
+    public String toStringAllProperties() {
+        return "Question{" +
+                "questionId=" + questionId +
+                ", question='" + question + '\'' +
+                ", answer='" + answer + '\'' +
+                ", category=" + category.getCategoryName() +
+                ", type=" + type.getTypeName() +
+                ", difficulty=" + difficulty.getDifficultyName() +
+                '}';
+    }
+
+    public String toStringJSON() {
+        return "{\"QuestionId\":\"" + questionId + "\"" +
+                ", \"Question\":\"" + question + '\"' +
+                ", \"Answer\":\"" + answer + '\"' +
+                '}';
+    }
+
+    public String toStringJSONAllProperties() {
+        return "{\"QuestionId\":\"" + questionId + "\"" +
+                ", \"Question\":\"" + question + '\"' +
+                ", \"Answer\":\"" + answer + '\"' +
+                ", \"Category\":\"" + category.getCategoryName() + '\"' +
+                ", \"Type\":\"" + type.getTypeName() + '\"' +
+                ", \"Difficulty\":\"" + difficulty.getDifficultyName() + '\"' +
+                '}';
     }
 }

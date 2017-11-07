@@ -16,10 +16,8 @@ public class Category {
     @Column(name = "CategoryName")
     private String CategoryName;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Category_CategoryID")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
     private Set<Question> question;
-
 
     public Category() {
 

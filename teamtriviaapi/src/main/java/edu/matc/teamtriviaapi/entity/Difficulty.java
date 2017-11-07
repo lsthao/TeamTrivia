@@ -16,8 +16,7 @@ public class Difficulty {
     @Column(name = "DifficultyName")
     private String DifficultyName;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Difficulty_DifficultyID")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy="difficulty")
     private Set<Question> question;
 
     public Difficulty() {

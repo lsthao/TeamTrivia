@@ -16,8 +16,7 @@ public class Type {
     @Column(name = "TypeName")
     private String TypeName;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Type_TypeID")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "type")
     private Set<Question> question;
 
     public Type() {
