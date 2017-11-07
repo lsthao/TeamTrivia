@@ -12,6 +12,8 @@ import java.util.List;
 
 @Path("questions")
 public class QuestionAPI {
+    QuestionDAO dao = new QuestionDAO();
+    Formatter formatter = new Formatter();
 
     // The Java method will process HTTP GET requests
     @GET
@@ -28,18 +30,18 @@ public class QuestionAPI {
     @Path("/{id}")
     public Response getQuestionHTML(@PathParam("id") String id) {
         if (!isNumeric(id)) {
-            return Response.status(400).entity("Ids should be numeric").build();
+            return Response.status(400).entity("Status 400: Ids should be numeric").build();
         }
 
-        Question question = new Question(); // TODO get question from database
-        String output ="Question with " + id + " here";
+        Question question = dao.getQuestionById(Integer.parseInt(id));
+        String output = "";
 
         if (question != null) {
-            // TODO question to string
+            output = question.toString(); // question to string
             return Response.status(200).entity(output).build();
 
         } else {
-            output = "Question does not exist";
+            output = "Status 404: Question does not exist";
             return Response.status(404).entity(output).build();
         }
     }
@@ -50,20 +52,19 @@ public class QuestionAPI {
     public Response getManyQuestions(@QueryParam("type") String type, @QueryParam("category") String category,
                                      @QueryParam("amount") String amount, @QueryParam("difficulty") String difficulty) {
 
-        // TODO check inputs
+        List<Question> questions = dao.getAllQuestions();
+        String output = "";
 
-        List<Question> questions = new ArrayList<Question>();
+        if (questions.size() > 0) {
 
-        // TODO get questions from database
+            for (Question question: questions) {
 
-        String output ="Questions here : amount-" + amount + "; difficulty- " +difficulty+ "; type- " +type +  "; category- " + category;
-
-        if (questions != null) {
-            // TODO question to string
+                output += question.toString(); // questions to string
+            }
             return Response.status(200).entity(output).build();
 
         } else {
-            output = "Question does not exist";
+            output = "Status 404: There are no questions here";
             return Response.status(404).entity(output).build();
         }
     }
