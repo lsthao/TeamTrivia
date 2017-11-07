@@ -18,6 +18,7 @@ import java.util.List;
 @Path("/type")
 public class TypeAPI {
     TypeDAO dao = new TypeDAO();
+    Formatter formatter = new Formatter();
 
     // The Java method will process HTTP GET requests
     @GET
@@ -36,7 +37,7 @@ public class TypeAPI {
     @Path("/{id}")
     public Response getTypeHTML(@PathParam("id") String id) {
         if (!isNumeric(id)) {
-            return Response.status(400).entity("Ids should be numeric").build();
+            return Response.status(400).entity("Status 400: Ids should be numeric").build();
         }
 
         Type type = dao.getTypeById(Integer.parseInt(id));
@@ -47,7 +48,7 @@ public class TypeAPI {
             return Response.status(200).entity(output).build();
 
         } else {
-            output = "That type does not exist";
+            output = "Status 404: That type does not exist";
             return Response.status(404).entity(output).build();
         }
     }
@@ -68,8 +69,66 @@ public class TypeAPI {
             return Response.status(200).entity(output).build();
 
         } else {
-            output = "There are no types here";
+            output = "Status 404: There are no types here";
             return Response.status(404).entity(output).build();
+        }
+
+    }
+
+
+    @GET
+    @Produces({"application/json", "text/plain"})
+    @Path("/JSON/{id}")
+    public Response getTypeJSON(@PathParam("id") String id) {
+
+        if (!isNumeric(id)) {
+
+            int status = 404;
+            String error = formatter.formatJSONMessage(status, "Ids should be numeric");
+            return Response.status(status).entity(error).build();
+        }
+
+        Type type = dao.getTypeById(Integer.parseInt(id));
+        String output = "";
+
+        if (type != null) {
+            output = type.toStringJSON(); // type to string
+            return Response.status(200).entity(output).build();
+
+        } else {
+            String error = formatter.formatJSONMessage(404, "That type does not exist");
+            return Response.status(404).entity(error).build();
+        }
+
+    }
+
+    @GET
+    @Produces({"application/json", "text/plain"})
+    @Path("/JSON/all")
+    public Response getAllTypesJSON() {
+
+        List<Type> types = dao.getAllTypes();
+        String output = "";
+
+        if (types.size() > 0) {
+
+            output += "[";
+            for (Type type: types) {
+
+                output += type.toStringJSON(); // type to string
+                output += ",";
+            }
+            output = output.substring(0, output.length() - 1);
+            output += "]";
+
+
+            return Response.status(200).entity(output).build();
+
+        } else {
+            int status = 404;
+            output = "There are no types here";
+            output = formatter.formatJSONMessage(status, output);
+            return Response.status(status).entity(output).build();
         }
 
     }
