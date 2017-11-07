@@ -15,6 +15,7 @@ import java.util.List;
 @Path("/difficulty")
 public class DifficultyAPI {
     DifficultyDAO dao = new DifficultyDAO();
+    Formatter formatter = new Formatter();
 
     // The Java method will process HTTP GET requests
     @GET
@@ -34,7 +35,7 @@ public class DifficultyAPI {
     @Path("/{id}")
     public Response getDifficultyHTML(@PathParam("id") String id) {
         if (!isNumeric(id)) {
-            return Response.status(400).entity("Ids should be numeric").build();
+            return Response.status(400).entity("Status 400: Ids should be numeric").build();
         }
 
         Difficulty difficulty = dao.getDifficultyById(Integer.parseInt(id));
@@ -45,7 +46,7 @@ public class DifficultyAPI {
             return Response.status(200).entity(output).build();
 
         } else {
-            output = "That difficulty does not exist";
+            output = "Status 404: That difficulty does not exist";
             return Response.status(404).entity(output).build();
         }
     }
@@ -66,8 +67,66 @@ public class DifficultyAPI {
             return Response.status(200).entity(output).build();
 
         } else {
-            output = "There are no difficulties here";
+            output = "Status 404: There are no difficulties here";
             return Response.status(404).entity(output).build();
+        }
+
+    }
+
+    @GET
+    @Produces({"application/json", "text/plain"})
+    @Path("/JSON/{id}")
+    public Response getDifficultyJSON(@PathParam("id") String id) {
+
+        if (!isNumeric(id)) {
+
+            int status = 404;
+            String error = formatter.formatJSONMessage(status, "Ids should be numeric");
+            return Response.status(status).entity(error).build();
+        }
+
+        Difficulty difficulty = dao.getDifficultyById(Integer.parseInt(id));
+        String output = "";
+
+        if (difficulty != null) {
+            output = difficulty.toStringJSON(); // difficulty to string
+            return Response.status(200).entity(output).build();
+
+        } else {
+            int status = 404;
+            String error = formatter.formatJSONMessage(status, "That difficulty does not exist");
+            return Response.status(status).entity(error).build();
+        }
+
+    }
+
+    @GET
+    @Produces({"application/json", "text/plain"})
+    @Path("/JSON/all")
+    public Response getAllDifficultyJSON() {
+
+        List<Difficulty> difficulties = dao.getAllDifficulties();
+        String output = "";
+
+        if (difficulties.size() > 0) {
+
+            output += "[";
+            for (Difficulty difficulty: difficulties) {
+
+                output += difficulty.toStringJSON(); // type to string
+                output += ",";
+            }
+            output = output.substring(0, output.length() - 1);
+            output += "]";
+
+
+            return Response.status(200).entity(output).build();
+
+        } else {
+            int status = 404;
+            output = "There are no difficulties here";
+            output = formatter.formatJSONMessage(status, output);
+            return Response.status(status).entity(output).build();
         }
 
     }
