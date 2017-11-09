@@ -15,7 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-@Path("/type")
+@Path("/types")
 public class TypeAPI {
     TypeDAO dao = new TypeDAO();
     Formatter formatter = new Formatter();

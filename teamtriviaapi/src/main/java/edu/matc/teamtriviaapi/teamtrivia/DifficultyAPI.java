@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 
-@Path("/difficulty")
+@Path("/difficulties")
 public class DifficultyAPI {
     DifficultyDAO dao = new DifficultyDAO();
     Formatter formatter = new Formatter();

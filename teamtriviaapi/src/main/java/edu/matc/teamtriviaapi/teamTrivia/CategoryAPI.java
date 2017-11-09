@@ -15,7 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-@Path("/category")
+@Path("/categories")
 public class CategoryAPI {
     CategoryDAO dao = new CategoryDAO();
     Formatter formatter = new Formatter();
