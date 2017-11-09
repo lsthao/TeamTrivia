@@ -2,7 +2,6 @@ package edu.matc.teamtriviaapi.persistence;
 
 import edu.matc.teamtriviaapi.entity.Difficulty;
 import org.apache.log4j.Logger;
-import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
