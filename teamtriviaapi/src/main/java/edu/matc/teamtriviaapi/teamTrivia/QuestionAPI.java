@@ -13,6 +13,7 @@ import edu.matc.teamtriviaapi.persistence.TypeDAO;
 import org.hibernate.criterion.MatchMode;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
@@ -153,13 +154,40 @@ public class QuestionAPI {
     }
 
     @POST
-    @Path("/post")
-    @Consumes("application/json")
-    public Response createQuestionInJSON(String test) {
+    @Path("/create")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public Response createQuestionInJSON(@FormParam("question") String question,
+                                         @FormParam("answer") String answer,
+                                         @FormParam("type") String type,
+                                         @FormParam("category") String category,
+                                         @FormParam("difficulty") String difficulty) {
 
-        String result = "Product created : " + test;
+        String result = "Creating question...";
+        int id = 0;
+
+        if (question != null && answer != null && type != null && category != null && difficulty != null) {
+            QuestionDAO questionDAO = new QuestionDAO();
+
+            Category categoryObj = questionDAO.getSingleCategoryObjectFromName(category);
+            Type typeObj = questionDAO.getSingleTypeObjectFromName(type);
+            Difficulty difficultyObj = questionDAO.getSingleDifficultyObjectFromName(difficulty);
+
+            Question questionObj = new Question(question, answer, categoryObj, typeObj, difficultyObj);
+            id = questionDAO.insertQuestion(questionObj);
+        } else {
+
+            // TODO error
+            // we do not have all the required data
+        }
+
+        if (id > 0) { // Question was created probably
+            // TODO format confirm output as json
+        } else {
+            // TODO format error output as json
+        }
+
         return Response.status(201).entity(result).build();
-
     }
 
     public static boolean isNumeric(String str)
