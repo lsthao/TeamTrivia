@@ -1,12 +1,26 @@
 package edu.matc.teamtriviaapi.persistence;
 
+import edu.matc.teamtriviaapi.entity.Question;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 public class QuestionDAOTest {
+
+    Question question;
+    QuestionDAO questionDAO;
+
+    int newQuestion = 0;
+
     @Before
     public void setUp() throws Exception {
+        questionDAO = new QuestionDAO();
+
+
+
+        question = new Question();
+        question.setAnswer("this is the answer!");
+
     }
 
     @After
