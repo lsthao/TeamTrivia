@@ -49,39 +49,15 @@ public class Question {
     }
 
     public void setQuestionId(int questionId) {
-           this.questionId = questionId;
+        this.questionId = questionId;
     }
 
     public String getQuestion() {
         return question;
     }
 
-    public void setQuestion() {
-        this.questionId = questionId;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory() {
-        this.category = category;
-    }
-
-    public Type getType() {
-        return type;
-    }
-
-    public void setType() {
-        this.type = type;
-    }
-
-    public Difficulty getDifficulty()   {
-        return difficulty;
-    }
-
-    public void setDifficulty() {
-        this.difficulty = difficulty;
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
     public String getAnswer() {
@@ -90,6 +66,30 @@ public class Question {
 
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
     }
 
     @Override

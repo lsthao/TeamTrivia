@@ -1,15 +1,16 @@
 package edu.matc.teamtriviaapi.persistence;
 
 import edu.matc.teamtriviaapi.entity.Difficulty;
+import org.hibernate.criterion.MatchMode;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 public class DifficultyDAOTest {
 
@@ -35,10 +36,9 @@ public class DifficultyDAOTest {
     public void getAllDifficulties() throws Exception {
         difficultyDAO.addDifficulty(difficulty);
 
-        List<Difficulty> difficulties = new ArrayList<Difficulty>();
-        difficulties.add(difficulty);
+        List<Difficulty> difficulties = difficultyDAO.getAllDifficulties();
 
-        assertEquals("Difficulty not added to List", 1, difficulties.size());
+        assertTrue(difficulties.size() > 0);
     }
 
     @Test
@@ -91,7 +91,11 @@ public class DifficultyDAOTest {
 
     @Test
     public void findByProperty() throws Exception {
-        
+        List<Difficulty> difficulties = difficultyDAO.findByProperty("DifficultyName", "Hard", MatchMode.EXACT);
+
+        assertEquals(1, difficulties.size());
+        assertEquals("Hard", difficulties.get(0).getDifficultyName());
+
     }
 
 }

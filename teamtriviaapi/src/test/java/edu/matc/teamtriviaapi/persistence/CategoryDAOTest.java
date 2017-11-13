@@ -1,16 +1,21 @@
 package edu.matc.teamtriviaapi.persistence;
 
 import edu.matc.teamtriviaapi.entity.Category;
+import org.apache.log4j.Logger;
+import org.hibernate.criterion.MatchMode;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 public class CategoryDAOTest {
+
+    private Logger logger = Logger.getLogger(this.getClass());
 
     Category category;
     CategoryDAO categoryDAO;
@@ -34,10 +39,9 @@ public class CategoryDAOTest {
     public void getAllCategories() throws Exception {
         categoryDAO.addCategory(category);
 
-        List<Category> categories = new ArrayList<Category>();
-        categories.add(category);
+        List<Category> categories = categoryDAO.getAllCategories();
 
-        assertEquals(1, categories.size());
+        assertTrue(categories.size() > 0);
     }
 
     @Test
@@ -89,7 +93,10 @@ public class CategoryDAOTest {
 
     @Test
     public void findByProperty() throws Exception {
+        List<Category> categories = categoryDAO.findByProperty("CategoryName", "Model, View, Controller (MVC)", MatchMode.EXACT);
 
+        assertEquals(1, categories.size());
+        assertEquals("Model, View, Controller (MVC)", categories.get(0).getCategoryName());
     }
 
 
