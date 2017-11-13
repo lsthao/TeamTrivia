@@ -1,0 +1,4 @@
+edu\matc\teamtriviaapi\persistence\QuestionDAOTest.class
+edu\matc\teamtriviaapi\persistence\CategoryDAOTest.class
+edu\matc\teamtriviaapi\persistence\TypeDAOTest.class
+edu\matc\teamtriviaapi\persistence\DifficultyDAOTest.class
