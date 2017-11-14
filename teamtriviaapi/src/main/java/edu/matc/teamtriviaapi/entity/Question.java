@@ -57,10 +57,8 @@ public class Question {
     }
 
     public void setQuestion(String question) {
-<<<<<<< HEAD
+
         this.question= question;
-=======
-        this.question = question;
     }
 
     public String getAnswer() {
@@ -69,7 +67,6 @@ public class Question {
 
     public void setAnswer(String answer) {
         this.answer = answer;
->>>>>>> 1e71c50d74b1dc8255403e288d8aaba6605857da
     }
 
     public Category getCategory() {

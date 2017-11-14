@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 @WebServlet(
-        urlPatterns = {"/all-questions"}
+        urlPatterns = {"/allQuestions"}
 )
 public class AllQuestions extends HttpServlet{
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -38,7 +38,7 @@ public class AllQuestions extends HttpServlet{
 
         HttpSession session = request.getSession();
 
-        URI baseURI = UriBuilder.fromUri("http://localhost:8080/teamTrivia/questions/").build();
+        URI baseURI = UriBuilder.fromUri("http://localhost:8080/teamtriviaapi/teamTrivia/questions/").build();
 
         ClientConfig config = new ClientConfig();
 
@@ -59,8 +59,7 @@ public class AllQuestions extends HttpServlet{
 
         String url = "/allquestions.jsp";
 
-        RequestDispatcher dispatcher =
-                getServletContext().getRequestDispatcher(url);
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
     }
 
