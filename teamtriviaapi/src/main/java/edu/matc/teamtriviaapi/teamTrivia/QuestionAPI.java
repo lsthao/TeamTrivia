@@ -64,7 +64,7 @@ public class QuestionAPI {
 
         List<Question> questions = new ArrayList<Question>();
 
-        if (type == null && category == null && amount == null && difficulty == null) {
+        if (type == null && category == null&& amount == null && difficulty == null) {
 
             questions = dao.getAllQuestions();
         } else {

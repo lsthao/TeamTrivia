@@ -23,7 +23,7 @@
         <select class="form-control" id="question-category" name="category">
             <option value="select">Select a Category</option>
             <c:forEach var="category" items="${question_categories_post}">
-                <option value="${category}">${category}</option>
+                <option value="${category.categoryID}">${category.categoryName}</option>
             </c:forEach>
         </select>
     </div>
@@ -32,7 +32,7 @@
         <select class="form-control" id="question-type" name="type">
             <option value="select">Select a Type</option>
             <c:forEach var="type" items="${question_types_post}">
-                <option value="${type}">${type}</option>
+                <option value="${type.typeID}">${type.typeName}</option>
             </c:forEach>
         </select>
     </div>
@@ -41,7 +41,7 @@
         <select class="form-control" id="question-difficulty" name="difficulty">
             <option value="select">Select Question Difficulty</option>
             <c:forEach var="difficulty" items="${question_difficulties_post}">
-                <option value="${difficulty}">${difficulty}</option>
+                <option value="${difficulty.difficultyID}">${difficulty.difficultyName}</option>
             </c:forEach>
         </select>
     </div>

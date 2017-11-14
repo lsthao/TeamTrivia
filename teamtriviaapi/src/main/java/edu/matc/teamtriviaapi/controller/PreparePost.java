@@ -81,13 +81,9 @@ public class PreparePost extends HttpServlet {
         }
 
 
-        System.out.println("cat::      " + categoryList);
-        System.out.println("type::      " +typeList);
-        System.out.println("diff::      " +difficultyList);
-
-        session.setAttribute("question_categories_post", categoryNames);
-        session.setAttribute("question_types_post", typeNames);
-        session.setAttribute("question_difficulties_post", difficultyNames);
+        session.setAttribute("question_categories_post", categoryList);
+        session.setAttribute("question_types_post", typeList);
+        session.setAttribute("question_difficulties_post", difficultyList);
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/addQuestion.jsp");
         requestDispatcher.forward(req, resp);

@@ -13,8 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
-@WebServlet
+@WebServlet(
+        urlPatterns = {"/index"}
+
+)
 public class FormController extends HttpServlet {
 
     private Category category;
@@ -27,22 +31,26 @@ public class FormController extends HttpServlet {
         HttpSession session = req.getSession();
 
         if (session.getAttribute("question-category") != null) {
-            session.setAttribute("question-categories", null);
+            session.setAttribute("question_categories", null);
         }
         if (session.getAttribute("question-type") != null) {
-            session.setAttribute("question-types", null);
+            session.setAttribute("question_types", null);
         }
         if (session.getAttribute("question-difficulty") != null) {
-            session.setAttribute("question-difficulties", null);
+            session.setAttribute("question_difficulties", null);
         }
 
         categoryDAO = new CategoryDAO();
         typeDAO = new TypeDAO();
         difficultyDAO = new DifficultyDAO();
 
-        session.setAttribute("question-categories", categoryDAO.getAllCategories());
-        session.setAttribute("question-types", typeDAO.getAllTypes());
-        session.setAttribute("question-difficulties", difficultyDAO.getAllDifficulties());
+        List<Category> categoryList = categoryDAO.getAllCategories();
+
+        session.setAttribute("question_categories", categoryList);
+        session.setAttribute("question_types", typeDAO.getAllTypes());
+        session.setAttribute("question_difficulties", difficultyDAO.getAllDifficulties());
+
+        System.out.println("category: " + categoryList.get(0).getCategoryName());
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/index.jsp");
         requestDispatcher.forward(req, resp);

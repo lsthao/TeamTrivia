@@ -40,13 +40,15 @@ public class QuestionDAO {
         try {
             session = SessionFactoryProvider.getSessionFactory().openSession();
             Criteria criteria = session.createCriteria(Question.class);
-            if (type != null){
+
+            if (!type.equals("select")){
+                System.out.println(type);
                 criteria.add(Restrictions.eq("type", getSingleTypeObjectFromName(type)));
             }
-            if (category != null) {
+            if (!category.equals("select")) {
                 criteria.add(Restrictions.eq("category", getSingleCategoryObjectFromName(category)));
             }
-            if (difficulty != null) {
+            if (!difficulty.equals("select")) {
                 criteria.add(Restrictions.eq("difficulty", getSingleDifficultyObjectFromName(difficulty)));
             }
             if (amount == null) {
@@ -225,6 +227,7 @@ public class QuestionDAO {
         if (types.size() > 0) {
             typeObj = types.get(0);
         }
+        System.out.println("id: " + typeObj.getTypeID());
         return typeObj;
     }
 
