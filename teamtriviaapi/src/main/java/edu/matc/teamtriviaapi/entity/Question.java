@@ -4,7 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "question")
+@Table(name = "Question")
 
 public class Question {
 
@@ -56,8 +56,8 @@ public class Question {
         return question;
     }
 
-    public void setQuestion() {
-        this.questionId = questionId;
+    public void setQuestion(String question) {
+        this.question= question;
     }
 
     public Category getCategory() {
