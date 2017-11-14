@@ -4,4 +4,22 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+
+
+  <servlet>
+    <servlet-name>FormController</servlet-name>
+    <servlet-class>edu.matc.teamtriviaapi.controller.FormController</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>FormController</servlet-name>
+    <url-pattern>/formController</url-pattern>
+  </servlet-mapping>
+
+  <welcome-file-list>
+    <welcome-file>formController</welcome-file>
+  </welcome-file-list>
+
 </web-app>
+
+
