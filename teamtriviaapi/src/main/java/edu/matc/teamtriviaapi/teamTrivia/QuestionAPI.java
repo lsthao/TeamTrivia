@@ -10,6 +10,7 @@ import edu.matc.teamtriviaapi.persistence.CategoryDAO;
 import edu.matc.teamtriviaapi.persistence.DifficultyDAO;
 import edu.matc.teamtriviaapi.persistence.QuestionDAO;
 import edu.matc.teamtriviaapi.persistence.TypeDAO;
+import org.apache.log4j.Logger;
 import org.hibernate.criterion.MatchMode;
 
 import javax.ws.rs.*;
@@ -20,8 +21,9 @@ import java.util.List;
 
 @Path("questions")
 public class QuestionAPI {
-    QuestionDAO dao = new QuestionDAO();
-    Formatter formatter = new Formatter();
+    private final Logger log = Logger.getLogger(this.getClass());
+    private QuestionDAO dao = new QuestionDAO();
+    private Formatter formatter = new Formatter();
 
     // The Java method will process HTTP GET requests
     @GET
@@ -93,7 +95,7 @@ public class QuestionAPI {
 
         if (!isNumeric(id)) {
 
-            int status = 404;
+            int status = 400;
             String error = formatter.formatJSONMessage(status, "Ids should be numeric");
             return Response.status(status).entity(error).build();
         }
@@ -154,19 +156,30 @@ public class QuestionAPI {
     }
 
     @POST
-    @Path("/create")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Path("HTML/create")
+    @Produces(MediaType.TEXT_HTML)
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response createQuestionInJSON(@FormParam("question") String question,
-                                         @FormParam("answer") String answer,
+    public Response createQuestionInHTML(@FormParam("question") String question,
+                                         @FormParam("answerTF") String answerTF,
+                                         @FormParam("answerShort") String answerShort,
                                          @FormParam("type") String type,
                                          @FormParam("category") String category,
                                          @FormParam("difficulty") String difficulty) {
 
-        String result = "Creating question...";
+        String result = "";
+        int status = 200;
         int id = 0;
 
-        if (question != null && answer != null && type != null && category != null && difficulty != null) {
+        String answer = "";
+        if (answerTF != null && type.equals("T/F")) {
+            answer = answerTF;
+        }
+
+        if (answerShort != null && type.equals("Short Answer")) {
+            answer = answerShort;
+        }
+
+        if (question.length() > 1 && answer.length() > 1 && type.length() > 1 && category.length() > 1 && difficulty.length() > 1) {
             QuestionDAO questionDAO = new QuestionDAO();
 
             Category categoryObj = questionDAO.getSingleCategoryObjectFromName(category);
@@ -175,19 +188,89 @@ public class QuestionAPI {
 
             Question questionObj = new Question(question, answer, categoryObj, typeObj, difficultyObj);
             id = questionDAO.insertQuestion(questionObj);
+            questionObj.setQuestionId(id);
+
+            if (id > 0) { // Question was created probably
+                // format confirm output
+                result = questionObj.toString();
+                status = 201;
+            } else {
+                // format error output
+                result = "Status 500: Something wonky happened";
+                status = 500;
+            }
         } else {
 
-            // TODO error
             // we do not have all the required data
+            result = "Status 400: invalid parameters";
+            status = 400;
+
         }
 
-        if (id > 0) { // Question was created probably
-            // TODO format confirm output as json
+        return Response.status(status).entity(result).build();
+    }
+
+    @POST
+    @Path("JSON/create")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public Response createQuestionInJSON(@FormParam("question") String question,
+                                         @FormParam("answerTF") String answerTF,
+                                         @FormParam("answerShort") String answerShort,
+                                         @FormParam("type") String type,
+                                         @FormParam("category") String category,
+                                         @FormParam("difficulty") String difficulty) {
+
+        String result = "";
+        int status = 200;
+        int id = 0;
+
+        String answer = "";
+        if (answerTF != null && type.equals("T/F")) {
+            answer = answerTF;
+        }
+
+        if (answerShort != null && type.equals("Short Answer")) {
+            answer = answerShort;
+        }
+
+        if (question.length() > 1 && answer.length() > 1 && type.length() > 1 && category.length() > 1 && difficulty.length() > 1) {
+            QuestionDAO questionDAO = new QuestionDAO();
+
+            Category categoryObj = questionDAO.getSingleCategoryObjectFromName(category);
+            Type typeObj = questionDAO.getSingleTypeObjectFromName(type);
+            Difficulty difficultyObj = questionDAO.getSingleDifficultyObjectFromName(difficulty);
+
+            Question questionObj = new Question(question, answer, categoryObj, typeObj, difficultyObj);
+            id = questionDAO.insertQuestion(questionObj);
+            questionObj.setQuestionId(id);
+
+            if (id > 0) { // Question was created probably
+                // format confirm output
+                result = questionObj.toStringJSON();
+                status = 201;
+            } else {
+                // format error output
+                result = "Status 500: Something wonky happened";
+                status = 500;
+
+                String error = formatter.formatJSONMessage(status, result);
+
+                return Response.status(status).entity(error).build();
+            }
         } else {
-            // TODO format error output as json
-        }
 
-        return Response.status(201).entity(result).build();
+            // we do not have all the required data
+            result = "Those are invalid parameters";
+
+            status = 400;
+
+            String error = formatter.formatJSONMessage(status, result);
+
+            return Response.status(status).entity(error).build();
+
+        }
+        return Response.status(status).entity(result).build();
     }
 
     public static boolean isNumeric(String str)
