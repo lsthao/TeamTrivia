@@ -41,13 +41,13 @@ public class QuestionDAO {
             session = SessionFactoryProvider.getSessionFactory().openSession();
             Criteria criteria = session.createCriteria(Question.class);
             if (type != null){
-                criteria.add(Restrictions.eq("type", getType(type)));
+                criteria.add(Restrictions.eq("type", getSingleTypeObjectFromName(type)));
             }
             if (category != null) {
-                criteria.add(Restrictions.eq("category", getCategory(category)));
+                criteria.add(Restrictions.eq("category", getSingleCategoryObjectFromName(category)));
             }
             if (difficulty != null) {
-                criteria.add(Restrictions.eq("difficulty", getDifficulty(difficulty)));
+                criteria.add(Restrictions.eq("difficulty", getSingleDifficultyObjectFromName(difficulty)));
             }
             if (amount == null) {
                 criteria.setMaxResults(100);
@@ -218,7 +218,7 @@ public class QuestionDAO {
         }
     }
 
-    public Type getType(String type) {
+    public Type getSingleTypeObjectFromName(String type) {
         TypeDAO typeDao = new TypeDAO();
         Type typeObj = new Type();
         List<Type> types = typeDao.findByProperty("TypeName", type, MatchMode.ANYWHERE);
@@ -228,7 +228,7 @@ public class QuestionDAO {
         return typeObj;
     }
 
-    public Category getCategory(String category) {
+    public Category getSingleCategoryObjectFromName(String category) {
         CategoryDAO categoryDAO = new CategoryDAO();
         Category categoryObj = new Category();
         List<Category> categories = categoryDAO.findByProperty("CategoryName", category, MatchMode.ANYWHERE);
@@ -238,7 +238,7 @@ public class QuestionDAO {
         return categoryObj;
     }
 
-    public Difficulty getDifficulty(String difficulty) {
+    public Difficulty getSingleDifficultyObjectFromName(String difficulty) {
         DifficultyDAO difficultyDAO = new DifficultyDAO();
         Difficulty difficultyObj = new Difficulty();
         List<Difficulty> difficulties = difficultyDAO.findByProperty("DifficultyName", difficulty, MatchMode.ANYWHERE);

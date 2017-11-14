@@ -1,15 +1,16 @@
 package edu.matc.teamtriviaapi.persistence;
 
 import edu.matc.teamtriviaapi.entity.Type;
+import org.hibernate.criterion.MatchMode;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 public class TypeDAOTest {
 
@@ -33,12 +34,10 @@ public class TypeDAOTest {
 
     @Test
     public void getAllTypes() throws Exception {
-        typeDAO.addType(type);
 
-        List<Type> difficulties = new ArrayList<Type>();
-        difficulties.add(type);
+        List<Type> types = typeDAO.getAllTypes();
 
-        assertEquals("Type not added to List", 1, difficulties.size());
+        assertTrue(types.size() > 0);
     }
 
     @Test
@@ -91,6 +90,10 @@ public class TypeDAOTest {
 
     @Test
     public void findByProperty() throws Exception {
+        List<Type> types = typeDAO.findByProperty("TypeName", "Short Answer", MatchMode.EXACT);
+
+        assertEquals(1, types.size());
+        assertEquals("Short Answer", types.get(0).getTypeName());
     }
 
 }
