@@ -28,18 +28,14 @@ import java.util.List;
 )
 public class PreparePost extends HttpServlet {
 
-    private Category category;
     private CategoryDAO categoryDAO;
     private TypeDAO typeDAO;
     private DifficultyDAO difficultyDAO;
     private final Logger log = Logger.getLogger(this.getClass());
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-
-        //System.out.println("here");
 
         if (session.getAttribute("category") != null) {
             session.setAttribute("question_categories", null);
@@ -51,35 +47,14 @@ public class PreparePost extends HttpServlet {
             session.setAttribute("question_difficulties", null);
         }
 
-        //System.out.println("before dao");
         categoryDAO = new CategoryDAO();
         typeDAO = new TypeDAO();
         difficultyDAO = new DifficultyDAO();
 
-
-        //System.out.println("before get alls");
-
+        // Get all of each type, category, difficulty
         List<Category> categoryList = categoryDAO.getAllCategories();
         List<Type> typeList = typeDAO.getAllTypes();
         List<Difficulty> difficultyList = difficultyDAO.getAllDifficulties();
-
-
-        List<String> categoryNames = new ArrayList<String>();
-        List<String> typeNames = new ArrayList<String>();
-        List<String> difficultyNames = new ArrayList<String>();
-
-        for (Category category: categoryList) {
-            categoryNames.add(category.getCategoryName());
-        }
-
-        for (Type type: typeList) {
-            typeNames.add(type.getTypeName());
-        }
-
-        for (Difficulty difficulty: difficultyList) {
-            difficultyNames.add(difficulty.getDifficultyName());
-        }
-
 
         session.setAttribute("question_categories_post", categoryList);
         session.setAttribute("question_types_post", typeList);
