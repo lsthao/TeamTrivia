@@ -29,9 +29,10 @@ import java.util.ArrayList;
 
 )
 
-
+//This class gets categories/types/difficulties using our REST API to fill the Question Generator form
 public class QuestionGenerator extends HttpServlet {
-
+    //This method creates array lists for categories, types and difficulties and
+    // gets the JSON response from our api to fill each and then sets them to an attribute to forward to the QuestionGenerator jsp
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
@@ -95,6 +96,8 @@ public class QuestionGenerator extends HttpServlet {
 
     }
 
+    //This method takes a jsonArray of the difficulty object from difficulty API response,
+    // gets each difficulty name and id from the jsonArray, adds the difficulty to an array list and returns the array list
     public ArrayList<Difficulty> parseJSONDifficulty(JSONArray jsonArray) throws JSONException {
         int jsonArrayLength = jsonArray.length();
         ArrayList<Difficulty> difficultyArrayList = new ArrayList<Difficulty>();
@@ -118,6 +121,8 @@ public class QuestionGenerator extends HttpServlet {
         return difficultyArrayList;
     }
 
+    //This method takes a jsonArray of the type object from type API response,
+    // gets each type name and id from the jsonArray, adds the type to an array list and returns the array list
     public ArrayList<Type> parseJSONType(JSONArray jsonArray) throws JSONException {
         int jsonArrayLength = jsonArray.length();
         ArrayList<Type> typeArrayList = new ArrayList<Type>();
@@ -140,6 +145,8 @@ public class QuestionGenerator extends HttpServlet {
         return typeArrayList;
     }
 
+    //This method takes a jsonArray of the category object from category API response,
+    // gets each category name and id from the jsonArray, adds the category to an array list and returns the array list
     public ArrayList<Category> parseJSON(JSONArray jsonArray) throws JSONException {
         int jsonArrayLength = jsonArray.length();
         ArrayList<Category> categoryArrayList = new ArrayList<Category>();
