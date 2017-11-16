@@ -1,52 +1,115 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page isELIgnored="false" %>
-<c:set var = "title" value = "Trivia API | Get Questions"/>
+<c:set var = "title" value = "Trivia API"/>
 
 <%@include file="head.jsp" %>
 <body>
-<div style="">
-    <h3>Fill out form to generate questions.</h3>
-</div>
-<div>
-    <form method="GET" action="teamTrivia/questions/all">
-        <div class="form-group">
-            <label for="question-category">Category: </label>
-            <select class="form-control" id="question-category" name="category">
-                <option value="select">Select a Category</option>
-                <c:forEach var="category" items="${question_categories}">
-                    <option value="${category.categoryName}">${category.categoryName}</option>
-                </c:forEach>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="question-amount">Amount of Questions: </label>
-            <input type="number" class="form-control" placeholder="0" min="0" id="question-amount" name="amount">
-        </div>
-        <div class="form-group">
-            <label for="question-type">Type of Questions: </label>
-            <select class="form-control" id="question-type" name="type">
-                <option value="select">Select a Type</option>
-                <c:forEach var="type" items="${question_types}">
-                    <option value="${type.typeName}">${type.typeName}</option>
-                </c:forEach>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="question-difficulty">Difficulty: </label>
-            <select class="form-control" id="question-difficulty" name="difficulty">
-                <option value="select">Select Question Difficulty</option>
-                <c:forEach var="difficulty" items="${question_difficulties}">
-                    <option value="${difficulty.difficultyName}">${difficulty.difficultyName}</option>
-                </c:forEach>
-            </select>
-        </div>
-        <div>
-            <button type="submit" class="btn btn-success" name="submit" id="submit" value="submit">Submit</button>
-        </div>
-    </form>
+<h1>Trivia API EndPoints & Usage</h1>
 
-    <a class="btn btn-success" href="addQuestion">Add a Question?</a>
+<h2>Questions</h2>
+<h4>teamTrivia/questions/all</h4>
+<ul>
+    <li>Returns all items in HTML</li>
+    <li>Returns id, question, answer</li>
+    <li>Option parameters include amount, difficulty, type, category</li>
+    <li>Example: teamTrivia/questions/all?difficulty=Medium&type=T/F&category=Java Hibernate&amount=10</li>
+</ul>
 
-</div>
+<h4>teamTrivia/questions/< id></h4>
+<ul>
+    <li>Returns specific item in HTML</li>
+    <li>Returns all item fields, including id, question, answer, difficulty, type, and category</li>
+</ul>
+
+<h4>teamTrivia/questions/JSON/all</h4>
+<ul>
+    <li>Returns all items in JSON</li>
+    <li>Returns id, question, answer</li>
+    <li>Option parameters include amount, difficulty, type, category</li>
+    <li>Example: teamTrivia/questions/JSON/all?difficulty=Medium&type=T/F&category=Java Hibernate&amount=10</li>
+</ul>
+
+<h4>teamTrivia/questions/JSON/< id ></h4>
+<ul>
+    <li>Return specific item in JSON</li>
+    <li>Returns all item fields including id, question, answer, difficulty, type and category</li>
+</ul>
+
+<h4>Notes</h4>
+<ul>
+    <li>Filtering on multiple values is not supported. For example, teamTrivia/questions/all?difficulty=Medium,Hard (selecting questions with difficulty of Medium or Hard) will return no results.</li>
+</ul>
+
+<h2>Categories</h2>
+
+<h4>teamTrivia/category/all</h4>
+<ul>
+    <li>Returns all items in HTML</li>
+</ul>
+
+<h4>teamTrivia/category/< id ></h4>
+<ul>
+    <li>Returns specific item in HTML</li>
+</ul>
+
+<h4>teamTrivia/category/JSON/all</h4>
+<ul>
+    <li>Returns all items in JSON</li>
+</ul>
+
+<h4>teamTrivia/category/JSON/< id ></h4>
+<ul>
+    <li>Returns specific item in JSON</li>
+</ul>
+
+
+<h2>Types</h2>
+<h4>teamTrivia/type/all</h4>
+<ul>
+    <li>Returns all items in HTML</li>
+</ul>
+
+<h4>teamTrivia/type/< id ></h4>
+<ul>
+    <li>Returns specific item in HTML</li>
+</ul>
+
+<h4>teamTrivia/type/JSON/all</h4>
+<ul>
+    <li>Returns all items in JSON</li>
+</ul>
+
+<h4>teamTrivia/type/JSON/< id ></h4>
+<ul>
+    <li>Returns specific item in JSON</li>
+</ul>
+
+
+<h2>Difficulties</h2>
+<h4>teamTrivia/difficulty/all</h4>
+<ul>
+    <li>Returns all items in HTML</li>
+</ul>
+
+<h4>teamTrivia/difficulty/< id ></h4>
+<ul>
+    <li>Returns specific item in HTML</li>
+</ul>
+
+<h4>teamTrivia/difficulty/JSON/all</h4>
+<ul>
+    <li>Returns all items in JSON</li>
+</ul>
+
+<h4>teamTrivia/difficulty/JSON/< id ></h4>
+<ul>
+    <li>Returns specific item in JSON</li>
+</ul>
+
+<h2>Check it out!</h2>
+<h4>See all questions <a href="allQuestions">here</a></h4>
+<h4>Try out our Question Generator <a href="questionGenerator">here</a></h4>
+
+
 </body>
 </html>
