@@ -109,7 +109,7 @@
 <h2>Check it out!</h2>
 <h4>See all questions <a href="allQuestions">here</a></h4>
 <h4>Try out our Question Generator <a href="questionGenerator">here</a></h4>
-
+<h4>Add questions <a href="addQuestion">here</a></h4>
 
 </body>
 </html>
