@@ -30,13 +30,13 @@ public class FormController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
 
-        if (session.getAttribute("question-category") != null) {
+        if (session.getAttribute("category") != null) {
             session.setAttribute("question_categories", null);
         }
-        if (session.getAttribute("question-type") != null) {
+        if (session.getAttribute("type") != null) {
             session.setAttribute("question_types", null);
         }
-        if (session.getAttribute("question-difficulty") != null) {
+        if (session.getAttribute("difficulty") != null) {
             session.setAttribute("question_difficulties", null);
         }
 
@@ -50,7 +50,7 @@ public class FormController extends HttpServlet {
         session.setAttribute("question_types", typeDAO.getAllTypes());
         session.setAttribute("question_difficulties", difficultyDAO.getAllDifficulties());
 
-        System.out.println("category: " + categoryList.get(0).getCategoryName());
+        //System.out.println("category: " + categoryList.get(0).getCategoryName());
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/index.jsp");
         requestDispatcher.forward(req, resp);

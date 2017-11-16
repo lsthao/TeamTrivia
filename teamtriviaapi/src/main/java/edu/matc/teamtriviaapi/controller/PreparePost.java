@@ -39,25 +39,25 @@ public class PreparePost extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
 
-        System.out.println("here");
+        //System.out.println("here");
 
-        if (session.getAttribute("question-category") != null) {
-            session.setAttribute("question-categories", null);
+        if (session.getAttribute("category") != null) {
+            session.setAttribute("question_categories", null);
         }
-        if (session.getAttribute("question-type") != null) {
-            session.setAttribute("question-types", null);
+        if (session.getAttribute("type") != null) {
+            session.setAttribute("question_types", null);
         }
-        if (session.getAttribute("question-difficulty") != null) {
-            session.setAttribute("question-difficulties", null);
+        if (session.getAttribute("difficulty") != null) {
+            session.setAttribute("question_difficulties", null);
         }
 
-        System.out.println("before dao");
+        //System.out.println("before dao");
         categoryDAO = new CategoryDAO();
         typeDAO = new TypeDAO();
         difficultyDAO = new DifficultyDAO();
 
 
-        System.out.println("before get alls");
+        //System.out.println("before get alls");
 
         List<Category> categoryList = categoryDAO.getAllCategories();
         List<Type> typeList = typeDAO.getAllTypes();

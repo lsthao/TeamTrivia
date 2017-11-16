@@ -2,11 +2,7 @@ package edu.matc.teamtriviaapi.controller;
 
 import edu.matc.teamtriviaapi.entity.Category;
 import edu.matc.teamtriviaapi.entity.Difficulty;
-import edu.matc.teamtriviaapi.entity.Question;
 import edu.matc.teamtriviaapi.entity.Type;
-import edu.matc.teamtriviaapi.persistence.CategoryDAO;
-import edu.matc.teamtriviaapi.persistence.DifficultyDAO;
-import edu.matc.teamtriviaapi.persistence.TypeDAO;
 import org.glassfish.jersey.client.ClientConfig;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,7 +23,6 @@ import javax.ws.rs.core.UriBuilder;
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.List;
 
 @WebServlet(
         urlPatterns = {"/question-generator"}
@@ -73,13 +68,13 @@ public class QuestionGenerator extends HttpServlet {
         }
 
 
-        if (session.getAttribute("question-category") != null) {
+        if (session.getAttribute("category") != null) {
             session.setAttribute("question_categories", null);
         }
-        if (session.getAttribute("question-type") != null) {
+        if (session.getAttribute("type") != null) {
             session.setAttribute("question_types", null);
         }
-        if (session.getAttribute("question-difficulty") != null) {
+        if (session.getAttribute("difficulty") != null) {
             session.setAttribute("question_difficulties", null);
         }
 
