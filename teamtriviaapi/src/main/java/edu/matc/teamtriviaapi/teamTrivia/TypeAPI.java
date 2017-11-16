@@ -22,10 +22,9 @@ public class TypeAPI {
 
     // The Java method will process HTTP GET requests
     @GET
-    // The Java method will produce content identified by the MIME Media type "text/plain"
     @Produces("text/html")
     public Response getMessage() {
-        // Return a simple message
+        // Return a simple message with info about api
         String output = "To view all available types use /teamTrivia/type/all<br />" +
                 "To view a specific type use /teamTrivia/type/< id ><br />" +
                 "To access JSON values, use /teamTrivia/type/JSON/all or type/JSON/< id >";
@@ -36,6 +35,8 @@ public class TypeAPI {
     @Produces({"text/html", "text/plain"})
     @Path("/{id}")
     public Response getTypeHTML(@PathParam("id") String id) {
+        // Get one type by id
+
         if (!isNumeric(id)) {
             return Response.status(400).entity("Status 400: Ids should be numeric").build();
         }
@@ -57,6 +58,7 @@ public class TypeAPI {
     @Produces({"text/html", "text/plain"})
     @Path("/all")
     public Response getAllTypesHTML() {
+        // Get all types in HTML
 
         List<Type> types = dao.getAllTypes();
         String output = "";
@@ -80,6 +82,7 @@ public class TypeAPI {
     @Produces({"application/json", "text/plain"})
     @Path("/JSON/{id}")
     public Response getTypeJSON(@PathParam("id") String id) {
+        // Get one type in JSON
 
         if (!isNumeric(id)) {
 
@@ -106,7 +109,7 @@ public class TypeAPI {
     @Produces({"application/json", "text/plain"})
     @Path("/JSON/all")
     public Response getAllTypesJSON() {
-
+        // Get all types in JSON
         List<Type> types = dao.getAllTypes();
         String output = "";
 

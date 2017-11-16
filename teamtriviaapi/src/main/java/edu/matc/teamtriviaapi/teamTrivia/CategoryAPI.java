@@ -25,7 +25,7 @@ public class CategoryAPI {
     // The Java method will produce content identified by the MIME Media type "text/plain"
     @Produces("text/html")
     public Response getMessage() {
-        // Return a simple message
+        // Return a simple message for anyone that ends at this endpoint
         String output = "We are always looking for new categories to add, contact us if there is a category you would like added.<br />" +
                 "To view all available categories use /teamTrivia/category/all<br />" +
                 "To view a specific category use /teamTrivia/category/< id ><br />" +
@@ -37,7 +37,10 @@ public class CategoryAPI {
     @Produces({"text/html", "text/plain"})
     @Path("/{id}")
     public Response getCategoryHTML(@PathParam("id") String id) {
+        // Returns category based on ID
+
         if (!isNumeric(id)) {
+            // The id wasn't numeric, send error
             return Response.status(400).entity("Status 400: Ids should be numeric").build();
         }
 
@@ -49,6 +52,7 @@ public class CategoryAPI {
             return Response.status(200).entity(output).build();
 
         } else {
+            // That ID doesn't exist
             output = "Status 404: That category does not exist";
             return Response.status(404).entity(output).build();
         }
@@ -58,7 +62,7 @@ public class CategoryAPI {
     @Produces({"text/html", "text/plain"})
     @Path("/all")
     public Response getAllCategoriesHTML() {
-
+        // Returns all categories in html
         List<Category> categories = dao.getAllCategories();
         String output = "";
 
@@ -80,6 +84,7 @@ public class CategoryAPI {
     @Produces({"application/json", "text/plain"})
     @Path("/JSON/{id}")
     public Response getCategoryJSON(@PathParam("id") String id) {
+        // Returns single category by id
 
         if (!isNumeric(id)) {
 
@@ -107,6 +112,7 @@ public class CategoryAPI {
     @Produces({"application/json", "text/plain"})
     @Path("/JSON/all")
     public Response getAllCategoriesJSON() {
+        // Returns all categories in JSON
 
         List<Category> categories = dao.getAllCategories();
         String output = "";
@@ -136,6 +142,7 @@ public class CategoryAPI {
 
     public static boolean isNumeric(String str)
     {
+        // Check if is number
         return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
     }
 
