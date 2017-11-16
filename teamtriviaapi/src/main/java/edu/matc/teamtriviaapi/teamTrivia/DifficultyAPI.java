@@ -19,10 +19,9 @@ public class DifficultyAPI {
 
     // The Java method will process HTTP GET requests
     @GET
-    // The Java method will produce content identified by the MIME Media type "text/plain"
     @Produces("text/html")
     public Response getMessage() {
-        // Return a simple message
+        // Return a simple message with explanations
         String output = "Difficulty is randomly based on our opinions! Sorry for any issues that may cause.<br />" +
                 "To view all available difficulties use /teamTrivia/difficulty/all<br />" +
                 "To view a specific difficulty use /teamTrivia/difficulty/< id ><br />" +
@@ -34,6 +33,8 @@ public class DifficultyAPI {
     @Produces({"text/html", "text/plain"})
     @Path("/{id}")
     public Response getDifficultyHTML(@PathParam("id") String id) {
+        // Gets single difficulty by ID
+
         if (!isNumeric(id)) {
             return Response.status(400).entity("Status 400: Ids should be numeric").build();
         }
@@ -55,7 +56,7 @@ public class DifficultyAPI {
     @Produces({"text/html", "text/plain"})
     @Path("/all")
     public Response getAllDifficultiesHTML() {
-
+        // Get all difficulties in html
         List<Difficulty> difficulties = dao.getAllDifficulties();
         String output = "";
 
@@ -77,7 +78,7 @@ public class DifficultyAPI {
     @Produces({"application/json", "text/plain"})
     @Path("/JSON/{id}")
     public Response getDifficultyJSON(@PathParam("id") String id) {
-
+        // Get one difficulty by id
         if (!isNumeric(id)) {
 
             int status = 404;
@@ -104,7 +105,7 @@ public class DifficultyAPI {
     @Produces({"application/json", "text/plain"})
     @Path("/JSON/all")
     public Response getAllDifficultyJSON() {
-
+        // get all difficulty in json
         List<Difficulty> difficulties = dao.getAllDifficulties();
         String output = "";
 

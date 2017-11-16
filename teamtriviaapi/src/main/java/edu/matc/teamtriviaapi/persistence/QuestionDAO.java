@@ -41,6 +41,7 @@ public class QuestionDAO {
             session = SessionFactoryProvider.getSessionFactory().openSession();
             Criteria criteria = session.createCriteria(Question.class);
 
+            // Adds criteria if user selected it
             if (!type.equals("select")){
                 System.out.println(type);
                 criteria.add(Restrictions.eq("type", getSingleTypeObjectFromName(type)));
