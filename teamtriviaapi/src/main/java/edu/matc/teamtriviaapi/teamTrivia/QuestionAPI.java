@@ -226,15 +226,15 @@ public class QuestionAPI {
         int id = 0;
 
         String answer = "";
-        if (answerTF != null && type.equals("Type{TypeID=1, TypeName=\'T/F\'}")) {
+        if (answerTF != null && type.equals("1")) {
             answer = answerTF;
         }
 
-        if (answerShort != null && type.equals("Type{TypeID=2, TypeName=\'Short Answer\'}")) {
+        if (answerShort != null && type.equals("2")) {
             answer = answerShort;
         }
 
-        if (question.length() > 1 && answer.length() > 1 && type.length() > 1 && category.length() > 1 && difficulty.length() > 1) {
+        if (question.length() > 0 && answer.length() > 1 && type.length() > 0 && category.length() > 0 && difficulty.length() > 0) {
             QuestionDAO questionDAO = new QuestionDAO();
 
             Category categoryObj = questionDAO.getSingleCategoryObjectFromName(category);

@@ -11,7 +11,11 @@
 <html>
 <%@include file="head.jsp" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+<style>
+    .hidden {
+        display: none;
+    }
+</style>
 <body>
 
 <form method="post" action="teamTrivia/questions/HTML/create">
@@ -75,7 +79,7 @@
         <select class="form-control" id="question-category2" name="category">
             <option value="select">Select a Category</option>
             <c:forEach var="category" items="${question_categories_post}">
-                <option value="${category}">${category}</option>
+                <option value="${category.categoryID}">${category.categoryName}</option>
             </c:forEach>
         </select>
     </div>
@@ -84,7 +88,7 @@
         <select class="form-control" id="question-type2" name="type">
             <option value="select">Select a Type</option>
             <c:forEach var="type" items="${question_types_post}">
-                <option value="${type}">${type}</option>
+                <option value="${type.typeID}">${type.typeName}</option>
             </c:forEach>
         </select>
     </div>
@@ -93,7 +97,7 @@
         <select class="form-control" id="question-difficulty2" name="difficulty">
             <option value="select">Select Question Difficulty</option>
             <c:forEach var="difficulty" items="${question_difficulties_post}">
-                <option value="${difficulty}">${difficulty}</option>
+                <option value="${difficulty.difficultyID}">${difficulty.difficultyName}</option>
             </c:forEach>
         </select>
     </div>
@@ -125,6 +129,7 @@
 
         $("#question-type").change(function () {
             var value = $(this).val();
+
             //make this coresspond to answer type via users db
             if (value == "1") {
                 document.getElementById("TF").classList.remove("hidden");
@@ -139,11 +144,11 @@
         $("#question-type2").change(function () {
             var value = $(this).val();
 
-            if (value == "Type{TypeID=1, TypeName=\'T/F\'}") {
+            if (value == "1") {
                 document.getElementById("TF2").classList.remove("hidden");
                 document.getElementById("short2").classList.add("hidden");
 
-            } else if (value == "Type{TypeID=2, TypeName=\'Short Answer\'}") {
+            } else if (value == "2") {
                 document.getElementById("TF2").classList.add("hidden");
                 document.getElementById("short2").classList.remove("hidden");
             }
