@@ -64,11 +64,11 @@ public class QuestionAPI {
 
         List<Question> questions = new ArrayList<Question>();
 
+
         if (type == null && category == null&& amount == null && difficulty == null) {
 
             questions = dao.getAllQuestions();
         } else {
-
             questions = dao.findByProperty(type, category, difficulty, amount);
         }
 
@@ -171,11 +171,11 @@ public class QuestionAPI {
         int id = 0;
 
         String answer = "";
-        if (answerTF != null && type.equals("1")) {
+        if (answerTF != null && type.equals("T/F")) {
             answer = answerTF;
         }
 
-        if (answerShort != null && type.equals("2")) {
+        if (answerShort != null && type.equals("Short Answer")) {
             answer = answerShort;
         }
 
@@ -226,11 +226,11 @@ public class QuestionAPI {
         int id = 0;
 
         String answer = "";
-        if (answerTF != null && type.equals("1")) {
+        if (answerTF != null && type.equals("T/F")) {
             answer = answerTF;
         }
 
-        if (answerShort != null && type.equals("2")) {
+        if (answerShort != null && type.equals("Short Answer")) {
             answer = answerShort;
         }
 

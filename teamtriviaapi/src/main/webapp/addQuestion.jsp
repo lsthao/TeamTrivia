@@ -26,7 +26,7 @@
         <select class="form-control" id="question-category" name="category">
             <option value="select">Select a Category</option>
             <c:forEach var="category" items="${question_categories_post}">
-                <option value="${category.categoryID}">${category.categoryName}</option>
+                <option value="${category.categoryName}">${category.categoryName}</option>
             </c:forEach>
         </select>
     </div>
@@ -35,7 +35,7 @@
         <select class="form-control" id="question-type" name="type">
             <option value="select">Select a Type</option>
             <c:forEach var="type" items="${question_types_post}">
-                <option value="${type.typeID}">${type.typeName}</option>
+                <option value="${type.typeName}">${type.typeName}</option>
             </c:forEach>
         </select>
     </div>
@@ -44,7 +44,7 @@
         <select class="form-control" id="question-difficulty" name="difficulty">
             <option value="select">Select Question Difficulty</option>
             <c:forEach var="difficulty" items="${question_difficulties_post}">
-                <option value="${difficulty.difficultyID}">${difficulty.difficultyName}</option>
+                <option value="${difficulty.difficultyName}">${difficulty.difficultyName}</option>
             </c:forEach>
         </select>
     </div>
@@ -79,7 +79,7 @@
         <select class="form-control" id="question-category2" name="category">
             <option value="select">Select a Category</option>
             <c:forEach var="category" items="${question_categories_post}">
-                <option value="${category.categoryID}">${category.categoryName}</option>
+                <option value="${category.categoryName}">${category.categoryName}</option>
             </c:forEach>
         </select>
     </div>
@@ -88,7 +88,7 @@
         <select class="form-control" id="question-type2" name="type">
             <option value="select">Select a Type</option>
             <c:forEach var="type" items="${question_types_post}">
-                <option value="${type.typeID}">${type.typeName}</option>
+                <option value="${type.typeName}">${type.typeName}</option>
             </c:forEach>
         </select>
     </div>
@@ -97,7 +97,7 @@
         <select class="form-control" id="question-difficulty2" name="difficulty">
             <option value="select">Select Question Difficulty</option>
             <c:forEach var="difficulty" items="${question_difficulties_post}">
-                <option value="${difficulty.difficultyID}">${difficulty.difficultyName}</option>
+                <option value="${difficulty.difficultyName}">${difficulty.difficultyName}</option>
             </c:forEach>
         </select>
     </div>
@@ -131,11 +131,11 @@
             var value = $(this).val();
 
             //make this coresspond to answer type via users db
-            if (value == "1") {
+            if (value == "T/F") {
                 document.getElementById("TF").classList.remove("hidden");
                 document.getElementById("short").classList.add("hidden");
 
-            } else if (value == "2") {
+            } else if (value == "Short Answer") {
                 document.getElementById("TF").classList.add("hidden");
                 document.getElementById("short").classList.remove("hidden");
             }
@@ -144,11 +144,11 @@
         $("#question-type2").change(function () {
             var value = $(this).val();
 
-            if (value == "1") {
+            if (value == "T/F") {
                 document.getElementById("TF2").classList.remove("hidden");
                 document.getElementById("short2").classList.add("hidden");
 
-            } else if (value == "2") {
+            } else if (value == "Short Answer") {
                 document.getElementById("TF2").classList.add("hidden");
                 document.getElementById("short2").classList.remove("hidden");
             }

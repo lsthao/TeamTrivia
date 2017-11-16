@@ -51,11 +51,12 @@ public class QuestionDAO {
             if (!difficulty.equals("select")) {
                 criteria.add(Restrictions.eq("difficulty", getSingleDifficultyObjectFromName(difficulty)));
             }
-            if (amount == null) {
+            if (amount == null || amount.length() == 0) {
                 criteria.setMaxResults(100);
             } else if (Integer.parseInt(amount) > 100) {
                 criteria.setMaxResults(100);
             } else if (amount != null) {
+
                 criteria.setMaxResults(Integer.parseInt(amount));
             }
             items =  criteria.list();
