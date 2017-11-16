@@ -28,11 +28,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Properties;
-
+//This class takes JSON, parses it to string array and passes it to allQuestion.jsp
 @WebServlet(
         urlPatterns = {"/allQuestions"}
 )
 public class AllQuestions extends HttpServlet{
+
+    //This method pulls the JSON/all request from the questionAPI and then parses the request from JSON using the parseJSON
+    //method. it then passes the string array to an EL variable and passes it to allQuestions.jsp
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         ArrayList<Question> questionsArrayList = new ArrayList<Question>();
 
@@ -63,7 +66,9 @@ public class AllQuestions extends HttpServlet{
         dispatcher.forward(request, response);
     }
 
-    //This method takes
+    //This method takes a JSON array and converts it into a string entities, then sets the questions formatted into String
+    // into a ArrayList of questions and returns it
+    //Returns ArrayList<Question>
     public ArrayList<Question> parseJSON(JSONArray jsonArray) throws JSONException {
         int jsonArrayLength = jsonArray.length();
         ArrayList<Question> questionArrayList = new ArrayList<Question>();
