@@ -25,6 +25,7 @@ public class QuestionAPI {
     private QuestionDAO dao = new QuestionDAO();
     private Formatter formatter = new Formatter();
 
+
     // The Java method will process HTTP GET requests
     @GET
     // The Java method will produce content identified by the MIME Media type "text/plain"
@@ -234,7 +235,7 @@ public class QuestionAPI {
             answer = answerShort;
         }
 
-        if (question.length() > 0 && answer.length() > 1 && type.length() > 0 && category.length() > 0 && difficulty.length() > 0) {
+        if (question.length() > 0 && answer.length() > 0 && type.length() > 0 && category.length() > 0 && difficulty.length() > 0) {
             QuestionDAO questionDAO = new QuestionDAO();
 
             Category categoryObj = questionDAO.getSingleCategoryObjectFromName(category);
