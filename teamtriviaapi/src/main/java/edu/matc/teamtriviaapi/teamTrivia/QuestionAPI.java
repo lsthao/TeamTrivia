@@ -171,15 +171,15 @@ public class QuestionAPI {
         int id = 0;
 
         String answer = "";
-        if (answerTF != null && type.equals("T/F")) {
+        if (answerTF != null && type.equals("1")) {
             answer = answerTF;
         }
 
-        if (answerShort != null && type.equals("Short Answer")) {
+        if (answerShort != null && type.equals("2")) {
             answer = answerShort;
         }
 
-        if (question.length() > 1 && answer.length() > 1 && type.length() > 1 && category.length() > 1 && difficulty.length() > 1) {
+        if (question.length() > 0 && answer.length() > 0 && type.length() > 0 && category.length() > 0 && difficulty.length() > 0) {
             QuestionDAO questionDAO = new QuestionDAO();
 
             Category categoryObj = questionDAO.getSingleCategoryObjectFromName(category);
@@ -226,11 +226,11 @@ public class QuestionAPI {
         int id = 0;
 
         String answer = "";
-        if (answerTF != null && type.equals("T/F")) {
+        if (answerTF != null && type.equals("Type{TypeID=1, TypeName=\'T/F\'}")) {
             answer = answerTF;
         }
 
-        if (answerShort != null && type.equals("Short Answer")) {
+        if (answerShort != null && type.equals("Type{TypeID=2, TypeName=\'Short Answer\'}")) {
             answer = answerShort;
         }
 
@@ -244,6 +244,7 @@ public class QuestionAPI {
             Question questionObj = new Question(question, answer, categoryObj, typeObj, difficultyObj);
             id = questionDAO.insertQuestion(questionObj);
             questionObj.setQuestionId(id);
+
 
             if (id > 0) { // Question was created probably
                 // format confirm output

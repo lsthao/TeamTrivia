@@ -13,11 +13,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <body>
-<body>
 
 <form method="post" action="teamTrivia/questions/HTML/create">
     <h3>New Question</h3>
-
+    <div><p>${question_type_post}</p></div>
     <div class="form-group">
         <label for="question-category">Category: </label>
         <select class="form-control" id="question-category" name="category">
@@ -121,26 +120,17 @@
         <button type="submit" class="btn btn-success" name="submit" id="submit2" value="submit">JSON Submit</button>
     </div>
 </form>
-<style>
-    .hidden {
-        display: none;
-    }
-
-    .show {
-        display: block;
-    }
-</style>
 <script>
     $(document).ready(function(){
 
         $("#question-type").change(function () {
             var value = $(this).val();
-
-            if (value == "T/F") {
+            //make this coresspond to answer type via users db
+            if (value == "1") {
                 document.getElementById("TF").classList.remove("hidden");
                 document.getElementById("short").classList.add("hidden");
 
-            } else if (value == "Short Answer") {
+            } else if (value == "2") {
                 document.getElementById("TF").classList.add("hidden");
                 document.getElementById("short").classList.remove("hidden");
             }
@@ -149,11 +139,11 @@
         $("#question-type2").change(function () {
             var value = $(this).val();
 
-            if (value == "T/F") {
+            if (value == "Type{TypeID=1, TypeName=\'T/F\'}") {
                 document.getElementById("TF2").classList.remove("hidden");
                 document.getElementById("short2").classList.add("hidden");
 
-            } else if (value == "Short Answer") {
+            } else if (value == "Type{TypeID=2, TypeName=\'Short Answer\'}") {
                 document.getElementById("TF2").classList.add("hidden");
                 document.getElementById("short2").classList.remove("hidden");
             }
