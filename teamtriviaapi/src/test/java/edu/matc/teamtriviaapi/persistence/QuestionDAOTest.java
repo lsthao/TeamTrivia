@@ -42,14 +42,11 @@ public class QuestionDAOTest {
         typeDAO = new TypeDAO();
         questionDAO = new QuestionDAO();
 
-        category = new Category();
-        category.setCategoryName("Java");
+        category = categoryDAO.getCategoryById(1);
 
-        difficulty = new Difficulty();
-        difficulty.setDifficultyName("Easy");
+        difficulty = difficultyDAO.getDifficultyById(1);
 
-        type = new Type();
-        type.setTypeName("T/F");
+        type = typeDAO.getTypeById(1);
 
         question = new Question();
         question.setQuestion("What is the answer?");
@@ -81,9 +78,7 @@ public class QuestionDAOTest {
 
     @Test
     public void getQuestionById() throws Exception {
-        newCategory = categoryDAO.addCategory(category);
-        newDifficulty = difficultyDAO.addDifficulty(difficulty);
-        newType = typeDAO.addType(type);
+
         newQuestion = questionDAO.insertQuestion(question);
 
         assertEquals("Error getting question by Id", question.getQuestionId(), questionDAO.getQuestionById(newQuestion).getQuestionId());
@@ -91,9 +86,7 @@ public class QuestionDAOTest {
 
     @Test
     public void getByCategoryID() throws Exception {
-        newCategory = categoryDAO.addCategory(category);
-        newDifficulty = difficultyDAO.addDifficulty(difficulty);
-        newType = typeDAO.addType(type);
+
         newQuestion = questionDAO.insertQuestion(question);
 
         List<Question> questions = questionDAO.getByCategoryID(category);
@@ -104,9 +97,7 @@ public class QuestionDAOTest {
 
     @Test
     public void getByTypeID() throws Exception {
-        newCategory = categoryDAO.addCategory(category);
-        newDifficulty = difficultyDAO.addDifficulty(difficulty);
-        newType = typeDAO.addType(type);
+
         newQuestion = questionDAO.insertQuestion(question);
 
         List<Question> questions = questionDAO.getByTypeID(type);
@@ -116,9 +107,7 @@ public class QuestionDAOTest {
 
     @Test
     public void getByDifficultyID() throws Exception {
-        newCategory = categoryDAO.addCategory(category);
-        newDifficulty = difficultyDAO.addDifficulty(difficulty);
-        newType = typeDAO.addType(type);
+
         newQuestion = questionDAO.insertQuestion(question);
 
         List<Question> questions = questionDAO.getByDifficultyID(difficulty);
@@ -129,17 +118,7 @@ public class QuestionDAOTest {
 
     @Test
     public void updateQuestion() throws Exception {
-        newCategory = categoryDAO.addCategory(category);
-        category.setCategoryID(categoryDAO.getCategoryById(1).getCategoryID());
-        category.setCategoryName(categoryDAO.getCategoryById(1).getCategoryName());
 
-        newDifficulty = difficultyDAO.addDifficulty(difficulty);
-        difficulty.setDifficultyID(difficultyDAO.getDifficultyById(1).getDifficultyID());
-        difficulty.setDifficultyName(difficultyDAO.getDifficultyById(1).getDifficultyName());
-
-        newType = typeDAO.addType(type);
-        type.setTypeID(typeDAO.getTypeById(1).getTypeID());
-        type.setTypeName(typeDAO.getTypeById(1).getTypeName());
 
         newQuestion = questionDAO.insertQuestion(question);
         question.setQuestion("What is the new question?");
@@ -164,9 +143,7 @@ public class QuestionDAOTest {
 
     @Test
     public void insertQuestion() throws Exception {
-        newCategory = categoryDAO.addCategory(category);
-        newDifficulty = difficultyDAO.addDifficulty(difficulty);
-        newType = typeDAO.addType(type);
+
         newQuestion = questionDAO.insertQuestion(question);
 
         assertEquals("Error getting question ID", question.getQuestionId(), questionDAO.getQuestionById(newQuestion).getQuestionId());
