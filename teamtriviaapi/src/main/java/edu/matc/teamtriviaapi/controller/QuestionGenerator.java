@@ -25,7 +25,7 @@ import java.net.URI;
 import java.util.ArrayList;
 
 @WebServlet(
-        urlPatterns = {"/question-generator"}
+        urlPatterns = {"/questionGenerator"}
 
 )
 public class QuestionGenerator extends HttpServlet {
@@ -82,7 +82,7 @@ public class QuestionGenerator extends HttpServlet {
         session.setAttribute("question_types", typesArrayList);
         session.setAttribute("question_difficulties", difficultyArrayList);
 
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/index.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/questionGenerator.jsp");
         requestDispatcher.forward(req, resp);
 
     }
