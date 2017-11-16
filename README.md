@@ -63,6 +63,10 @@ Week 12
 Base Url: http://localhost:8080/teamtriviaapi/teamTrivia
 
 ### Questions
+#### POST - teamTrivia/questions/HTML/create or teamTrivia/questions/JSON/create
+  * Returns added item in HTML or JSON
+  * Returns id, question, answer
+
 #### teamTrivia/questions/all
   * Returns all items in HTML
   * Returns id, question, answer
