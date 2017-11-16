@@ -63,6 +63,7 @@ public class AllQuestions extends HttpServlet{
         dispatcher.forward(request, response);
     }
 
+    //This method takes
     public ArrayList<Question> parseJSON(JSONArray jsonArray) throws JSONException {
         int jsonArrayLength = jsonArray.length();
         ArrayList<Question> questionArrayList = new ArrayList<Question>();

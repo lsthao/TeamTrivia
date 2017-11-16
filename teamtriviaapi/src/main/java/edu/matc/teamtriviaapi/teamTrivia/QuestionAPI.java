@@ -1,6 +1,8 @@
 package edu.matc.teamtriviaapi.teamTrivia;
 /**
  * Created by sarah on 10/31/2017.
+ * This class serves as a repository for the addQuestion and generate question applications, also contains all the GET
+ * and POST functions for these classes
  */
 import edu.matc.teamtriviaapi.entity.Category;
 import edu.matc.teamtriviaapi.entity.Difficulty;
@@ -36,6 +38,7 @@ public class QuestionAPI {
         return Response.status(200).entity(output).build();
     }
 
+    //This HTTP method gets a question via its DB ID and returns it in HTML text format
     @GET
     @Produces({"text/html", "text/plain"})
     @Path("/{id}")
@@ -57,6 +60,7 @@ public class QuestionAPI {
         }
     }
 
+    //This HTTP method gets many/all questions from the DB based on a query parameter and returns it via HTML text format
     @GET
     @Produces({"text/html", "text/plain"})
     @Path("/all")
@@ -89,6 +93,7 @@ public class QuestionAPI {
         }
     }
 
+    //This method gets a question via ID from the DB and returns it in JSON format
     @GET
     @Produces({"application/json", "text/plain"})
     @Path("/JSON/{id}")
@@ -115,6 +120,7 @@ public class QuestionAPI {
 
     }
 
+    //This HTTP method gets all questions based on query parameters and returns them as JSON
     @GET
     @Produces({"application/json", "text/plain"})
     @Path("/JSON/all")
@@ -156,6 +162,9 @@ public class QuestionAPI {
 
     }
 
+    //This HTTP method gets form data via addQuestion.jsp as form parameters and checks type, based on type it sets new
+    //question parameter's answer based on its type. it then sets all parameters and passes it into the API database
+    //on completion, it will post the inputted data as HTML and status code 201
     @POST
     @Path("HTML/create")
     @Produces(MediaType.TEXT_HTML)
@@ -211,6 +220,9 @@ public class QuestionAPI {
         return Response.status(status).entity(result).build();
     }
 
+    //This HTTP method gets form data via addQuestion.jsp as form parameters and checks type, based on type it sets new
+    //question parameter's answer based on its type. it then sets all parameters and passes it into the API database
+    //on completion, it will post the inputted data as JSON and status code 201
     @POST
     @Path("JSON/create")
     @Produces(MediaType.APPLICATION_JSON)
@@ -275,6 +287,7 @@ public class QuestionAPI {
         return Response.status(status).entity(result).build();
     }
 
+    //This method checks for numeric integrity.
     public static boolean isNumeric(String str)
     {
         return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.

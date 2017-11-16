@@ -35,6 +35,8 @@ public class PreparePost extends HttpServlet {
     private final Logger log = Logger.getLogger(this.getClass());
 
 
+    //DoGet method that checks for EL language and sets it to null if any is found. It then populates the select form
+    // via database values to be selected and then sets JSTL variables via selected items. it then passes these to addQuestion.jsp
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
@@ -90,6 +92,7 @@ public class PreparePost extends HttpServlet {
 
     }
 
+    // doPost method
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doPost(req, resp);
