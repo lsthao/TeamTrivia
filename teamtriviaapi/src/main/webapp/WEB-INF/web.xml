@@ -6,18 +6,8 @@
   <display-name>Archetype Created Web Application</display-name>
 
 
-  <servlet>
-    <servlet-name>FormController</servlet-name>
-    <servlet-class>edu.matc.teamtriviaapi.controller.FormController</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>FormController</servlet-name>
-    <url-pattern>/index</url-pattern>
-  </servlet-mapping>
-
   <welcome-file-list>
-    <welcome-file>index</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
 
 </web-app>

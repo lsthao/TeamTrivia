@@ -228,7 +228,6 @@ public class QuestionDAO {
         if (types.size() > 0) {
             typeObj = types.get(0);
         }
-        System.out.println("id: " + typeObj.getTypeID());
         return typeObj;
     }
 
